@@ -1,14 +1,17 @@
 import tkinter as tk
+import time as tm
 
-spielername=input('ihr name:')
+Score = 0
+
+current_player=input('Player name:')
 window = tk.Tk()
 window.geometry('600x400')
 window.title('Wissen ist Macht')
-label = tk.Label(window,text='Spieler:'+spielername,font=('Arial',15))
-label.place(anchor="nw")
+player_name = tk.Label(window,text='Player:'+' '+current_player,font=('Arial',15))
+player_name.place(anchor="nw")
 
-
-
+score = tk.Label(window,text='Score:'+str(Score),font=('Arial',15))
+score.pack(anchor="ne")
 
 
 
