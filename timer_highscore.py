@@ -6,14 +6,13 @@ class ScoreTimer:
         self.score = 10
 
     def start_timer(self):
-        try:
+
             while True:
                 self.update_score()
                 self.display_timer()
                 time.sleep(1)
                 self.seconds += 1
-        except KeyboardInterrupt:
-            print('\nTimer gestoppt.')
+
 
     def update_score(self):
         if self.seconds >= 10 and self.seconds % 2 == 0:
