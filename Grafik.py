@@ -39,15 +39,15 @@ current_player=input('Player name:')
 window = tk.Tk()
 
 window.title('Wissen ist Macht')
-
+window.geometry('1280x720')
 #---------------------------------------------------------------------------------------------
 #Spieler code
 player_name = tk.Label(window,text='Player:'+' '+current_player,font=('Arial',15))
-player_name.grid(row=0,column=0)
+player_name.grid(row=0,column=0,sticky='NW')
 
 #Score code
 score = tk.Label(window,text='Score:'+str(Score),font=('Arial',15))
-score.grid(row=0,column=3)
+score.grid(row=0,column=3,sticky='NE')
 
 #Fragen_funktion
 question = tk.Label(window,text=frage,font=('Arial',20),bg="beige")
@@ -56,17 +56,17 @@ question.grid(row=1,column=0,columnspan=4)
 #---------------------------------------------------------------------------------------------
 
 #Tasten
-Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),bg='#ff6666',width=40,height=1,command=lambda:(update_score('A'),antwort()))
-Buttona.grid(row=2,column=0)
+Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),bg='#ff6666',width=40,height=5,command=lambda:(update_score('A'),antwort()))
+Buttona.grid(row=2,column=0,padx=110,columnspan=2,pady=40)
 
-Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),bg='#458B74',width=40,height=1,command=lambda:(update_score('B'),falsche_antwort()))
-Buttonb.grid(row=2,column=3)
+Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),bg='#458B74',width=40,height=5,command=lambda:(update_score('B'),falsche_antwort()))
+Buttonb.grid(row=2,column=2,padx=60,columnspan=2)
 
-Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),bg='skyblue',width=40,height=1,command=lambda:(update_score('C'),falsche_antwort()))
-Buttonc.grid(row=3,column=0)
+Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),bg='skyblue',width=40,height=5,command=lambda:(update_score('C'),falsche_antwort()))
+Buttonc.grid(row=3,column=0,columnspan=2)
 
-Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),bg='#a37d00',width=40,height=1,command=lambda:(update_score('D'),falsche_antwort()))
-Buttond.grid(row=3,column=3)
+Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),bg='#a37d00',width=40,height=5,command=lambda:(update_score('D'),falsche_antwort()))
+Buttond.grid(row=3,column=2,columnspan=2)
 
 
 
