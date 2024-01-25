@@ -20,7 +20,7 @@ questions_dict = {
     },
     3: {
         'question': 'Welche beiden NFL-Teams haben die meisten Super-Bowl Siege?',
-        'possible_answers': ['Kansas City Chiefs und green Bay Packers', 'San Francisco 49ers und Kansas City Chiefs', 'New England Patriots und New York Jets', 'Pittsburgh Steelers und New England Patriots'],
+        'possible_answers': ['Kansas City Chiefs und Green Bay Packers', 'San Francisco 49ers und Kansas City Chiefs', 'New England Patriots und New York Jets', 'Pittsburgh Steelers und New England Patriots'],
         'right_answer': 'Pittsburgh Steelers und New England Patriots',
         'picture': 'sports.jpg',
         'category': 'Sport'
