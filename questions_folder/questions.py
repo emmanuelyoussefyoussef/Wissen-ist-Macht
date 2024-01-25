@@ -14,7 +14,7 @@ questions_dict = {
     2: {
         'question': 'Welcher Tennisspieler steht aktuell auf dem ersten PLatz der ATP-Waltrangliste? (Stand 01.2024)',
         'possible_answers': ['Novak Đoković', 'Roger Federer', 'Boris Becker', 'Alexander Zverev'],
-        'right_answer': 'hNovak Đoković',
+        'right_answer': 'Novak Đoković',
         'picture': 'sports.jpg',
         'category': 'Sport'
     },
