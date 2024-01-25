@@ -1,3 +1,5 @@
+import questions
+
 def start_quiz():
     questions_dict = questions.get_random_questions()
 
