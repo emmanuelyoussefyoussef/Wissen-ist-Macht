@@ -3,15 +3,18 @@ import random
 questions_dict = {
     1: {
         'question': 'Welches Land ist aktuell Fußballrekordweltmeister? (Stand 01.2024)',
-        'possible_answers': ['Italien', 'Frankreich', 'Brasilien', 'Deutschland'],
-        'right_answer': 'Brasilien ',
-        'picture': 'sports.jpg',
-        'category': 'Sport'
+        'first_possible_answer': 'Italien',
+        'second_possible_answer': 'Frankreich',
+        'third_possible_answer': 'Brasilien',
+        'fourth_possibe_answer': 'Deutschland',
+        'question_answer': 'Brasilien',
+        'question_category': 'Sport',
+        'category_picture': 'sports.jpg'
     },
     2: {
         'question': 'Welcher Tennisspieler steht aktuell auf dem ersten PLatz der ATP-Waltrangliste? (Stand 01.2024)',
         'possible_answers': ['Novak Đoković', 'Roger Federer', 'Boris Becker', 'Alexander Zverev'],
-        'right_answer': 'Novak Đoković',
+        'right_answer': 'hNovak Đoković',
         'picture': 'sports.jpg',
         'category': 'Sport'
     },
@@ -23,7 +26,7 @@ questions_dict = {
         'category': 'Sport'
     },
     4: {
-        'question': 'Wie viele Siege hat Wladimir Klitschko in seiner Boxkarriere einfahren können.',
+        'question': 'Wie viele Siege hat Wladimir Klitschko in seiner Boxkarriere einfahren können?',
         'possible_answers': ['53', '64', '77', '49'],
         'right_answer': '64',
         'picture': 'sports.jpg',
@@ -350,6 +353,356 @@ questions_dict = {
         'right_answer': 'Finnland',
         'picture': 'geography.jpg',
         'category': 'Geographie'
+    },
+    51: {
+        'question':'Wie heißt der größte Planet unseres Sonnensystems?',
+        'possible_answers':['Jupter', 'Uranus', 'Venus', 'Mars'],
+        'right_answer':'Jupiter',
+        'picture':'',
+        'category':'Astronomie'
+    },
+    52: {
+        'question':'Was ist ein Komet',
+        'possible_answers':['Ein kleiner Planet', 'Eine schmutzige Schneekugel aus Eis und Staub', 'Ein felsiger Himmeslkörper', 'Ein wandelnder Stern'],
+        'right_answer':'Eine schmutzige Schneekugel aus Eis und Staub',
+        'picture':'',
+        'category':'Astronomie'
+    },
+    53: {
+        'question':'Welcher Planet hat deutlich sichtbare Ringe?',
+        'possible_answers':['Mars', 'Venus', 'Saturn', 'Uranus'],
+        'right_answer':'Saturn',
+        'picture':'',
+        'category':'Astronomie'
+    },
+    54: {
+        'question':'Was verursacht eine Supernova?',
+        'possible_answers':['Kollision von Planeten', 'Kollision von Galaxien', 'Erlöschung eines schwarzen Lochs', 'Explosion eines massiven Sterns'],
+        'right_answer':'Explosion eines massiven Sterns',
+        'picture':'',
+        'category':'Astronomie'
+    },
+    55: {
+        'question':'Welche Galaxie ist die nächste zu unserer Milchstraße?',
+        'possible_answers':['Andromeda-Galaxie', 'Sombrero-Galaxie', 'Socratis-Galaxie', 'Dreiecks-Galaxie'],
+        'right_answer':'Andromeda-Galaxie',
+        'picture':'',
+        'categoy':'Astronomie'
+    },
+    56: {
+        'question':'Welches Sternbild enthält den Polarstern?',
+        'possible_answers':['Orion', 'Ursa (Großer Bär)', 'Scorpius (Skorpion)', 'Leo (Löwe)'],
+        'right_answer':'Ursa (Großer Bär)',
+        'picture':'',
+        'category':'Astronomie'
+    },
+    57: {
+        'question':'Was ist ein Exoplanet',
+        'possible_answers':['Ein nicht entwickelter Planet', 'Ein Mond eines anderen Planeten', 'Ein Planet außerhalb unseres Sonnensystems', 'Ein künstlich geschaffener Himmelskörper'],
+        'right_answer':'Ein Planet außerhalb unseres Sonnensystems',
+        'picture':'',
+        'categoy':'Astronomie'
+    },
+    58: {
+        'question':'Welches Phänomen tritt ein, wenn ein kleiner Himmelskörper in die Erdatmosphäre eintritt und verglüht?',
+        'possible_answers':['Meteoriteneinschlag', 'Komet', 'Asteroid', 'Meteor'],
+        'right_answer':'Meteor',
+        'picture':'',
+        'category':'Astronomie'
+    },
+    59: {
+        'question':'Wie heißt das leistungsstärkste Weltraumteleskop, das für Infrarotbeobachtungen konzipiert wurde?',
+        'possible_answers':['Hubble-Teleskop', 'James Webb Space Telescope', 'Kepler-Telescope', 'Spitzer-Telescope'],
+        'right_answer':'James Webb Space Telescope',
+        'picture':'',
+        'category':'Astronomie'
+    },
+    60: {
+        'question':'Welches Ereignis tritt aus, wenn die Erde den küzesten Tag des Jahres hat?',
+        'possible_answers':['Herbstsonnenwende', 'Sommeranfang', 'Wintersonnenwende', 'Frühlingsanfang'],
+        'right_answer':'Wintersonnenwende',
+        'picture':'',
+        'category':'Astronomie'
+    },
+    61: {
+        'question':'Welches ist das härteste natürliche Material auf der Erde?',
+        'possible_answers':['Diamant', 'Quarz', 'Obsidian', 'Stahl'],
+        'right_answer':'Diamant',
+        'picture':'',
+        'category':'Natur'
+    },
+    62: {
+        'question':'Welches ist das größte Ökosystem aud der Erde?',
+        'possible_answers':['Regenwald', 'Wüste', 'Tundra', 'Ozean'],
+        'right_answer':'Ozean',
+        'picture':'',
+        'category':'Natur'
+    },
+    63: {
+        'question':'Welches ist das älteste lebende Baumsystem der Welt?',
+        'possible_answers':['Bristelcone-Kiefern', 'Eukalyptus-Bäume', 'Ginkgo-Bäume', 'Redwood-Bäume'],
+        'right_answer': 'Bristlecone-Bäume',
+        'picture':'',
+        'category':'Natur'
+    },
+    64: {
+        'question':'Welches ist das größste Riff-Ökosystem der Welt?',
+        'possible_answers':['floida Keys Reef', 'Maldives Coral Reef', 'Great Barrier Reef', 'Belize Barrier Reef'],
+        'right_answer':'Great Barrier Reef',
+        'picture':'',
+        'category':'Natur'
+    },
+    65: {
+        'question':'Welches Gas ist für die grüne Farbe in Pflanzen verantwortlich',
+        'possible_answers':['Chlorophyl', 'Kohlenstoff', 'Sauerstoff', 'Stickstoff'],
+        'right_answer':'Chlorophyl',
+        'picture':'',
+        'category':'Natur'
+    },
+    66: {
+        'question':'Welche der folgenden Blumen repräsentiert normalerweise Frieden und Ruhe?',
+        'possible_answers':['rose', 'Tulpe', 'Lilie', 'Kamille'],
+        'right_answer':'Lilie',
+        'picture':'',
+        'category':'Natur'
+    },
+    67: {
+        'question':'Welches ist der größte Wüstentyp der Welt?',
+        'possible_answers':['Sahare-Wüste', 'Gobi-Wüste', 'Antarktische-Wüste', 'Mojave-Wüste'],
+        'right_answer':'Antarktische Wüste',
+        'picture':'',
+        'category':'Natur'
+    },
+    68: {
+        'question':'Welches ist das größte Lebewesen auf dem Land?',
+        'possible_answers':['Giraffe', 'Elefant', 'Blauwal', 'Sequioa-Baum'],
+        'right_answer':'Sequioa-Baum',
+        'picture':'',
+        'category':'Natur'
+    },
+    69: {
+        'question':'Wie heißt der größte Ozean unseres Planeten?',
+        'possible_answers':['Pazifischer Ozean', 'Indischer Ozean', 'Südlicher Ozean', 'Atlantischer Ozean'],
+        'right_answer':'Pazifischer Ozean',
+        'picture':'',
+        'category':'Natur'
+    },
+    70: {
+        'question':'Was ist ein Tundra-Ökosystem?',
+        'possible_answers':['Ein Gebiet mit ewigem Eis', 'Eine große Wüste', 'Ein trockenes Grasland', 'Ein Baumbestand aus Nadelbäumen'],
+        'right_answer':'Ein Gebiet mit ewigem Eis',
+        'picture':'',
+        'category':'Natur'
+    },
+    71: {
+        'question':'',
+        'possible_answers':['', '', '', ''],
+        'right_answer':'',
+        'picture':'',
+        'category':'Informatik'
+    },
+    72: {
+        'question':'',
+        'possible_answers':['', '', '', ''],
+        'right_answer':'',
+        'picture':'',
+        'category':'Informatik'
+    },
+    73: {
+        'question':'',
+        'possible_answers':['', '', '', ''],
+        'right_answer':'',
+        'picture':'',
+        'category':'Informatik'
+    },
+    74: {
+        'question':'',
+        'possible_answers':['', '', '', ''],
+        'right_answer':'',
+        'picture':'',
+        'category':'Informatik'
+    },
+    75: {
+        'question':'',
+        'possible_answers':['', '', '', ''],
+        'right_answer':'',
+        'picture':'',
+        'category':'Informatik'
+    },
+    76: {
+        'question':'',
+        'possible_answers':['', '', '', ''],
+        'right_answer':'',
+        'picture':'',
+        'category':'Informatik'
+    },
+    77: {
+        'question':'',
+        'possible_answers':['', '', '', ''],
+        'right_answer':'',
+        'picture':'',
+        'category':'Informatik'
+    },
+    78: {
+        'question':'',
+        'possible_answers':['', '', '', ''],
+        'right_answer':'',
+        'picture':'',
+        'category':'Informatik'
+    },
+    79: {
+        'question':'',
+        'possible_answers':['', '', '', ''],
+        'right_answer':'',
+        'picture':'',
+        'category':'Informatik'
+    },
+    80: {
+        'question':'',
+        'possible_answers':['', '', '', ''],
+        'right_answer':'',
+        'picture':'',
+        'category':'Informatik'
+    },
+    81: {
+        'question':'Welcher Vogel hat den längesten jährlichen Zugweg?',
+        'possible_answers':['Kolibri', 'Kondor', 'Albatros', 'Storch'],
+        'right_answer':'Albatros',
+        'picture':'',
+        'category':'Tiere'
+    },
+    82: {
+        'question':'Welches Tier kann durch Mimkry das Aussehen von anderen gefährlichen Tieren imitieren?',
+        'possible_answers':['Chamäleon', 'Oktopus', 'Fledermaus', 'Pfeilgiftfrosch'],
+        'right_answer':'Pfeilgiftfrosch',
+        'picture':'',
+        'category':'Tiere'
+    },
+    83: {
+        'question':'In welchem natürlichen Lebensraum leben Kängurus typischerweise?',
+        'possible_answers':['Wüste', 'Tundra', 'Regenwald', 'Grasland'],
+        'right_answer':'Grasland',
+        'picture':'',
+        'category':'Tiere'
+    },
+    84: {
+        'question':'Welches Tier hält den längesten Winterschlaf?',
+        'possible_answers':['Bär', 'Fledermaus', 'Igel', 'Eichhörnchen'],
+        'right_answer':'Fledermaus',
+        'picture':'',
+        'category':'Tiere'
+    },
+    85: {
+        'question':'Welches Reptil kann am längesten ohne Nahrung überleben?',
+        'possible_answers':['Schlange', 'Leguan', 'Schildkröte', 'Krokodil'],
+        'right_answer':'Krokodil',
+        'picture':'',
+        'category':'Tiere'
+    },
+    86: {
+        'question':'Wie heißt das schnellste Meerestier?',
+        'possible_answers':['Orca', 'Weißer Hai', 'Thunfisch', 'Delfin'],
+        'right_answer':'Thunfisch',
+        'picture':'',
+        'category':'Tiere'
+    },
+    87: {
+        'question':'Wie heißt das einzige Flugfähige Säugetier?',
+        'possible_answers':['Flughund', 'Pinguin', 'Mistkäfer', 'Fledermaus'],
+        'right_answer':'Fledermaus',
+        'picture':'',
+        'category':'Tiere'
+    },
+    88: {
+        'question':'Welches Tier kann seinen Schwanz abwerfen, um Feinde zu täuschen?',
+        'possible_answers':['Gecko', 'Leguan', 'Eidechse', 'Lalamander'],
+        'right_answer':'',
+        'picture':'',
+        'category':'Tiere'
+    },
+    89: {
+        'question':'Welche beiden Säugetiere legen Eier?',
+        'possible_answers':['', 'Schnabeltiere und Ameisenigel', '', ''],
+        'right_answer':'Schnabeltiere und Ameisenigel',
+        'picture':'',
+        'category':'Tiere'
+    },
+    90: {
+        'question':'Welcher Vogel ist für seinen kunstvollen Nestbau in Form einer Tasche bekannt?',
+        'possible_answers':['Elster', 'Webervogel', 'Spatz', 'Storch'],
+        'right_answer':'Webervogel',
+        'picture':'',
+        'category':'Tiere'
+    },
+    91: {
+        'question':'Was ist die Einheit der elektrischen Spannung',
+        'possible_answers':['Watt', 'Volt', 'Ampere', 'Ohm'],
+        'right_answer':'Volt',
+        'picture':'',
+        'category':'Wisschenschaft'
+    },
+    92: {
+        'question':'Welche Einheit wird verwendet um Radioaktivität zu messen?',
+        'possible_answers':['Sievert', 'Rad', 'Rem', 'Gray'],
+        'right_answer':'Sievert',
+        'picture':'',
+        'category':'Wisschenschaft'
+    },
+    93: {
+        'question':'Welches Element hat die chemische Bezeichnung "FE"?',
+        'possible_answers':['Kalzium', 'Flur', 'Kalium', 'Eisen'],
+        'right_answer':'Eisen',
+        'picture':'',
+        'category':'Wisschenschaft'
+    },
+    94: {
+        'question':'Wer formulierte die Theorie der Evolution durch natürliche Auslese?',
+        'possible_answers':['Gregor Mendel', 'Alfred Wegener', 'Charles Darwin', 'Linus Pauling'],
+        'right_answer':'Charles Darwin',
+        'picture':'',
+        'category':'Wisschenschaft'
+    },
+    95: {
+        'question':'Welches Organ im menschlichen Körper ist für die Blutbildung verantwortlich?',
+        'possible_answers':['Knochenmark', 'Herz', 'Leber', 'Niere'],
+        'right_answer':'Knochenmark',
+        'picture':'',
+        'category':'Wisschenschaft'
+    },
+    96: {
+        'question':'Welches Organ ist für die Regulation des Blutzuckerspiegels verantwortlich?',
+        'possible_answers':['Niere', 'Bauchspeicheldrüse', 'Leber', 'Darm'],
+        'right_answer':'Bauchspeicheldrüse',
+        'picture':'',
+        'category':'Wisschenschaft'
+    },
+    97: {
+        'question':'Welches Vitamin wird als "Sonnenvitamin" bezeichnet?',
+        'possible_answers':['Vitamin A', 'Vitamin B', 'Vitamin D', 'Vitamin K'],
+        'right_answer':'Vitamin D',
+        'picture':'',
+        'category':'Wisschenschaft'
+    },
+    98: {
+        'question':'Welches ist das häufigste Edelgas in der Erdkruste?',
+        'possible_answers':['Helium', 'Neon', 'Krypton', 'Argon'],
+        'right_answer':'Argon',
+        'picture':'',
+        'category':'Wisschenschaft'
+    },
+    99: {
+        'question':'Welcher Wissenschaftler entwickelte die Theorie der Quantentechnik?',
+        'possible_answers':['Albert Einstein', 'Erwin Schrödinger', 'Niels Rohr', 'Max Planck'],
+        'right_answer':'Max Planck',
+        'picture':'',
+        'category':'Wisschenschaft'
+    },
+    100: {
+        'question':'Welches ist das erste kommerzielle Elektroauto, das weltweit anerkannt wurde?',
+        'possible_answers':['Nissan Leaf', 'Tesla Roadster', 'Toyota Pirus', 'Chevrolet Volt'],
+        'right_answer':'Tesla Roadster',
+        'picture':'',
+        'category':'Wisschenschaft'
     },
 }
 
