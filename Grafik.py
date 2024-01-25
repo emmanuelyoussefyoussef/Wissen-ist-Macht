@@ -4,6 +4,8 @@ import time
 
 Score = 0 
 frage="placeholder for the question"
+
+
 #Score update funktion
 def update_score(key):
     global Score
@@ -11,6 +13,7 @@ def update_score(key):
         Score = int(random.random()*100)
         score.config(text='Score: ' + str(Score))
     #window.after(1000,update_score)
+
 def antwort():
     global frage
     frage = "Richtig"
@@ -19,6 +22,9 @@ def antwort():
 def falsche_antwort():
     global frage
     frage="Falsch HAHAHAHAHA"
+    Score = 0
+    score.config(text='Score: ' + str(Score))
+
     question.config(text=frage)
 
 def reset_frage():
