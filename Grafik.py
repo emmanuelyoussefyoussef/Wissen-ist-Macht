@@ -6,18 +6,22 @@ import os
 #Variabeln
 Score = 0 
 richtige_antwort=''
+x=0
 #frage=questions_dict[random_num()]
 
 def random_num():
     num=random.random()*99 +1
     return int(num)
 
-frage=questions_dict[random_num()]['question']
-
+key,frage=get_random_questions()
+frage2=''
 def neue_frage():
-    #global frage
-    frage=questions_dict[random_num()]['question']
-    question.config(text=frage)
+    global frage
+    global x
+    frage2=frage[key[x]]['question']
+    print(x,key[x],frage2)
+    x = x+1
+    question.config(text=frage2)
 
 #Score update funktion
 def update_score(key):
@@ -73,7 +77,7 @@ score = tk.Label(window,text='Score:'+str(Score),font=('Arial',15))
 score.grid(row=0,column=4,sticky='NE')
 
 #Fragen_funktion
-question = tk.Label(window,text=frage,font=('Arial',20),bg="beige")
+question = tk.Label(window,text=frage2,font=('Arial',20),bg="beige")
 question.grid(row=2,column=0,columnspan=5)
 
 #---------------------------------------------------------------------------------------------
