@@ -6,61 +6,102 @@ import os
 #Variabeln
 Score = 0 
 richtige_antwort=''
-x=0
-#frage=questions_dict[random_num()]
+index=0
+boole=True
 
+
+
+
+#imported_questions=questions_dict[random_num()]
 def random_num():
     num=random.random()*99 +1
     return int(num)
 
-key,frage=get_random_questions()
-frage2=''
+
+
+
+
+#diese variabel speichert 10 importierte fragen 
+key,imported_questions=get_random_questions()
+
+#dies ist die Liste mit den 10 fragen die angezeigt werden sollen
+shown_questions=''
+
+
+
+
+
 def neue_frage():
-    global frage
-    global x
-    frage2=frage[key[x]]['question']
-    print(x,key[x],frage2)
-    x = x+1
-    question.config(text=frage2)
+    global imported_questions
+    global index
+    shown_questions=imported_questions[key[index]]['question']
+    print(index,key[index],shown_questions)
+    index = index +1
+    question.config(text=shown_questions)
+
+
+
+def erste_frage():
+    global boole
+    if boole ==True:
+        neue_frage()
+        boole=False
 
 #Score update funktion
 def update_score(key):
-    #global Score
+    global Score
     if key == 'A':
-        Score = int(random.random()*100)
+        Score = Score+1
         score.config(text='Score: ' + str(Score))
-    #window.after(1000,update_score)
+
 
 
 #Diese Funktion zeigt das Ergebnis Richtig an
 def antwort():
+    window.bell()
+    update_score('A')
     question.config(text="Richtig")
     window.after(1000,neue_frage)
 
+
+
+
 #diese funktion prüft ab ob die eingabe des spielers richtig ist    
 def scanner(key):
-    if key==richtige_antwort:
-        antwort()
-    else:falsche_antwort()
+    if index<10:
+        if key=='A':
+            antwort()
+        else:falsche_antwort()
+    else:
+        ende()
+
+
+
 
 #Diese Funktion zeigt das Ergebnis Falsch an
 def falsche_antwort():
-    #global frage
     question.config(text="Falsch HAHAHAHAHA")
     Score = 0
     score.config(text='Score: ' + str(Score))
     window.after(1000,neue_frage)
 
+
+
+
 #Diese Funktion zeigt wieder die Nächste frage an
 def reset_frage():
-    #global frage
-    frage="placeholder for the question"
-    question.config(text=frage)
+    imported_questions="placeholder for the question"
+    question.config(text=imported_questions)
     window.after(1500,reset_frage)
+
+def ende():
+    endergebnis=Score
+    question.config(text=endergebnis)
+    #window.after(5000,window.destroy)
+    
 
 #Spielername wird damit abgefragt
 current_player=input('Player name:')
-
 
 #Grafik einstellungen
 window = tk.Tk()
@@ -77,7 +118,7 @@ score = tk.Label(window,text='Score:'+str(Score),font=('Arial',15))
 score.grid(row=0,column=4,sticky='NE')
 
 #Fragen_funktion
-question = tk.Label(window,text=frage2,font=('Arial',20),bg="beige")
+question = tk.Label(window,text=shown_questions,font=('Arial',20),bg="beige")
 question.grid(row=2,column=0,columnspan=5)
 
 #---------------------------------------------------------------------------------------------
@@ -93,24 +134,23 @@ abstandmitte= tk.Label(window,text='',width=40,height=5)
 abstandmitte.grid(row=4,column=2)
 
 #Antwort Blöcke
-Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),bg='#ff6666',width=40,height=5,command=lambda:(update_score('A'),antwort()))
+Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),bg='#ff6666',width=40,height=5,command=lambda:(scanner('A')))
 Buttona.grid(row=4,column=0,padx=30)
 
-Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),bg='#458B74',width=40,height=5,command=lambda:(update_score('B'),falsche_antwort()))
+Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),bg='#458B74',width=40,height=5,command=lambda:(update_score('B'),scanner('B')))
 Buttonb.grid(row=4,column=4)
 
-Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),bg='skyblue',width=40,height=5,command=lambda:(update_score('C'),falsche_antwort()))
+Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),bg='skyblue',width=40,height=5,command=lambda:(update_score('C'),scanner('C')))
 Buttonc.grid(row=5,column=0)
 
-Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),bg='#a37d00',width=40,height=5,command=lambda:(update_score('D'),falsche_antwort()))
+Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),bg='#a37d00',width=40,height=5,command=lambda:(update_score('D'),scanner('D')))
 Buttond.grid(row=5,column=4)
 
 
 
-#diese funktion ruft jede sekunde die update_score funktion auf
-#window.after(1500,reset_frage)
-
+erste_frage()
 window.mainloop()
+
 
 
 
