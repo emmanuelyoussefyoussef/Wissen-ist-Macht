@@ -6,6 +6,8 @@ class ScoreTimer:
     def __init__(self):
         self.seconds = 0
         self.score = 10
+        self.total_score = 0
+        self.total_time = 0  # Neue Variable für die Gesamtzeit
         self.running = False
         self.timer_thread = None
 
@@ -13,12 +15,13 @@ class ScoreTimer:
         self.running = True
         self.timer_thread = threading.Thread(target=self._timer_thread)
         self.timer_thread.start()
-        
+
     def _timer_thread(self):
         while self.running:
             self.update_score()
             time.sleep(1)
             self.seconds += 1
+            self.total_time += 1
 
     def stop_timer(self):
         self.running = False
@@ -33,11 +36,22 @@ class ScoreTimer:
         minutes, seconds = divmod(remainder, 60)
         print(f'Time: {hours:02}:{minutes:02}:{seconds:02} | Score: {self.score:02}', end='\r')
 
+    def calculate_total_score(self):
+        self.total_score += self.score
+
+    def get_total_time(self):
+        return self.total_time
+
+    def get_total_time_formatted(self):
+        hours, remainder = divmod(self.total_time, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        return f'{hours:02}:{minutes:02}:{seconds:02}'
+
 def start_quiz(timer):
     questions_dict = questions.get_random_questions()
 
     for question_number, question_info in questions_dict.items():
-        # Setzt den Timer und Score für jede Frage zurück
+        # Setze den Timer und Score für jede Frage zurück
         timer.seconds = 0
         timer.score = 10
 
@@ -49,23 +63,20 @@ def start_quiz(timer):
         for i, answer in enumerate(answers, start=1):
             print(f'{i}. {answer}')
 
-        # Startet den Timer vor der Benutzereingabe
-        timer.start_timer()
-
         user_answer = input('Antwort eingeben (1-4): ')
 
-        # Stoppt den Timer nach der Benutzereingabe
-        timer.stop_timer()
-
-        # Timer und Score anzeigen, nachdem die Antwort eingegeben wurde
+        # Timer und Score anzeigen, während die Antwort eingegeben wird
         timer.display_timer()
 
-        # Wartet kurz, um die Anzeige zu sehen, bevor die nächste Frage kommt
-        time.sleep(1)
-        print()
+        # Berechne die Gesamtpunktzahl nach jeder Frage
+        timer.calculate_total_score()
 
+    # Timer am Ende des gesamten Quiz anzeigen
+    timer.display_timer()
+    print(f'\nGesamtpunktzahl: {timer.total_score}')
+    print(f'Gesamtzeit: {timer.get_total_time_formatted()}')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     score_timer = ScoreTimer()
     score_timer.start_timer()
 
