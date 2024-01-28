@@ -1,10 +1,6 @@
 import tkinter as tk
 import random
-import time
 from questions_folder.questions import *
-import os
-
-
 
 #Variabeln
 Score = 0 
