@@ -7,12 +7,11 @@ Score = 0
 richtige_antwort=''
 index=0
 switcher=True
-#diese variabel speichert 10 importierte fragen 
+#diese dict speichert 10 importierte fragen von der dict
 key,imported_questions=get_random_questions()
 #Variabeln
 shown_questions=''
 correct_questions=''
-answer=''
 possible_answer=''
 #Diese Funktionen verteilt die Antworten auf den Buttons
 def auswahl():
@@ -26,11 +25,13 @@ def auswahl():
 def neue_frage():
     global imported_questions
     global correct_questions
-    global answer
-    shown_questions=imported_questions[key[index]]['question'] #aus der imported_questions dict wird ein element ausgesucht und eingespeichert
-    print(index,key[index],shown_questions)#Dient zur kontrolle
-    question.config(text=shown_questions)#Das bearbeitet den Text und aktualisiert die anzeige
-    auswahl()
+    if index<=9:#Diese Funktion behebt ein Error da mein index später out of range of 9 ist
+        shown_questions=imported_questions[key[index]]['question'] #aus der imported_questions dict wird ein element ausgesucht und eingespeichert
+        print(index,key[index],shown_questions)#Dient zur kontrolle
+        print(index,imported_questions[key[index]]['question_answer'])#kontrolle, soll später weg
+        question.config(text=shown_questions)#Das bearbeitet den Text und aktualisiert die anzeige
+        auswahl()
+    else:ende()#ruft die ende() funktion auf um das spiel zu freezen
 #Diese FRage wird ein mal aufgerufen um die erste frage zu bekommen am anfang dann ist die Funktion nutzlos
 def erste_frage():
     global switcher
@@ -41,7 +42,7 @@ def erste_frage():
 #Score update funktion
 def update_score():
     global Score
-    Score = Score+1
+    Score = Score+1#score um 1 erhöhen
     score.config(text='Score: ' + str(Score))#Hier wird die Score Anzeige aktualisiert und erneut angezeigt
 #Diese Funktion zeigt das Ergebnis Richtig an
 def richtige_antwort():
@@ -64,10 +65,11 @@ def scanner(antwort):
 #Diese Funktion zeigt das Ergebnis Falsch an
 def falsche_antwort():
     global index
-    window.bell()
+    window.bell()#Soundbefehl beim klicken
     falsche_antworten=["Nein","Falsch","versuchs das nächste mal"]#liste mit verschiedene variationen von antworten
     rand_ant=falsche_antworten[random.randrange(0,3)]#wählt ein element von der falsche_antworten Liste aus
     question.config(text=str(rand_ant))#Aktualisiert die Anzeigt und zeigt falsch an
+    #window.after(1000,korrekte_ant)
     window.after(1000,neue_frage)#nach 1 Sekunde wird die neue_frage() funktion aufgerufen
     if index ==9:#Die If funktion prüft ob die zehnte frage angezeigt wurde und stoppt dann die eingabe
         window.after(2000,ende)#Am ende wird Richtig oder falsch angezeigt und erst nach 2 sekunden wird das Ergebnis angezeigt
@@ -75,12 +77,16 @@ def falsche_antwort():
 def ende():
     endergebnis=Score #Score wird in eine unabhängige variabel gespeichert
     question.config(text='Dein Score beträgt:'+str(endergebnis))#Der Score wird angezeigt
+#Diese Funktion soll die Richtige antwort anzeigen falls der Spieler eine falsche Antwort klickt
+def korrekte_ant():
+    correct_ans=imported_questions[key[index]]['question_answer']
+    question.config(text=str(correct_ans))
 #Spielername abfrage
 current_player=input('Player name:')
 #Grafik einstellungen
 window = tk.Tk()
-window.title('Wissen ist Macht')
-window.geometry('1280x720')
+window.title('Wissen ist Macht')#Titelname vom spiel
+window.geometry('1280x720')#Window grafikeinstellungen
 #---------------------------------------------------------------------------------------------
 #Spieler placeholder
 player_name = tk.Label(window,text='Player:'+' '+current_player,font=('Arial',15))
