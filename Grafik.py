@@ -3,19 +3,14 @@ import random
 import time
 from questions_folder.questions import *
 import os
+
+
+
 #Variabeln
 Score = 0 
 richtige_antwort=''
 index=0
-boole=True
-
-
-
-
-#imported_questions=questions_dict[random_num()]
-def random_num():
-    num=random.random()*99 +1
-    return int(num)
+switcher=True
 
 
 
@@ -24,74 +19,73 @@ def random_num():
 #diese variabel speichert 10 importierte fragen 
 key,imported_questions=get_random_questions()
 
-#dies ist die Liste mit den 10 fragen die angezeigt werden sollen
+#Variabeln
 shown_questions=''
 correct_questions=''
 answer=''
 possible_answer=''
 
+#Diese Funktionen verteilt die Antworten auf den Buttons
 def auswahl():
     global possible_answer
-    possible_answer=imported_questions[key[index]]['possible_answers']
-    Buttona.config(text=possible_answer[0])
-    Buttonb.config(text=possible_answer[1])
-    Buttonc.config(text=possible_answer[2])
-    Buttond.config(text=possible_answer[3])
+    possible_answer=imported_questions[key[index]]['possible_answers']#Die variable possible_answer erhält asu der dict die 4 antwortmöglichkeiten
+    Buttona.config(text=possible_answer[0])#Aus der possible_answer liste das erste Element
+    Buttonb.config(text=possible_answer[1])#Aus der possible_answer liste das zweite Element
+    Buttonc.config(text=possible_answer[2])#Aus der possible_answer liste das dritte Element
+    Buttond.config(text=possible_answer[3])#Aus der possible_answer liste das vierte Element
 
 
-
+#Diese funktion sorgt dafür dass neue fragen ausgewählt werden
 def neue_frage():
     global imported_questions
     global correct_questions
     global answer
-    shown_questions=imported_questions[key[index]]['question']
-    print(index,key[index],shown_questions)
-    question.config(text=shown_questions)
+    shown_questions=imported_questions[key[index]]['question'] #aus der imported_questions dict wird ein element ausgesucht und eingespeichert
+    print(index,key[index],shown_questions)#Dient zur kontrolle
+    question.config(text=shown_questions)#Das bearbeitet den Text und aktualisiert die anzeige
     auswahl()
     
 
 
-
+#Diese FRage wird ein mal aufgerufen um die erste frage zu bekommen am anfang dann ist die Funktion nutzlos
 def erste_frage():
-    global boole
+    global switcher
     global possible_answer
-    if boole ==True:
+    if switcher ==True:#If funktion damit die Funktion erste_frage() nicht ständig läuft sondern einmalig
         neue_frage()
-        boole=False
-        possible_answer=imported_questions[key[index]]['possible_answers']
+        switcher=False#Setzt switcher auf false damit die If funktion nicht mehr erfüllbar wird
 
 
 #Score update funktion
-def update_score(key):
+def update_score():
     global Score
-    if key == 'A':
-        Score = Score+1
-        score.config(text='Score: ' + str(Score))
+    Score = Score+1
+    score.config(text='Score: ' + str(Score))#Hier wird die Score Anzeige aktualisiert und erneut angezeigt
 
 
 
 #Diese Funktion zeigt das Ergebnis Richtig an
 def richtige_antwort():
-    window.bell()
-    update_score('A')
-    question.config(text="Richtig")
-    window.after(1000,neue_frage)
-    if index ==9:
+    window.bell()#Sorgt für ein ton
+    update_score()
+    question.config(text="Richtig")#Ändert die Frage und falls die antwort richtig war dann wird Richtig angezeigt
+    window.after(1000,neue_frage)#Nach 1Sekunde wird die neue_frage() funktion aufgerufen
+    if index ==9:#Die If funktion prüft ob die zehnte frage angezeigt wurde und stoppt dann die eingabe
         window.after(2000, ende)#Am ende wird Richtig oder falsch angezeigt und erst nach 2 sekunden wird das Ergebnis angezeigt
 
 
 
 
 #diese funktion prüft ab ob die eingabe des spielers richtig ist    
-def scanner(var):
+def scanner(antwort):
     global index
-    if index<=9:
-        if var==imported_questions[key[index]]['question_answer']:
+    if index<=9:#Solange wir nicht die 10te frage errreicht haben wird die kontrolle fortlaufen
+        if antwort==imported_questions[key[index]]['question_answer']:#prüft ob die ausgewählte antwort die richtige ist
             richtige_antwort()
         else:falsche_antwort()
     else:
         ende()
-    index = index +1
+    index = index +1#erhöht die index variable um 1 nach dem beantworten einer Frage
 
 
 
@@ -100,28 +94,23 @@ def scanner(var):
 def falsche_antwort():
     global index
     window.bell()
-    question.config(text="Falsch HAHAHAHAHA")
-    #score.config(text='Score: ' + str(Score))
-    window.after(1000,neue_frage)
-    if index ==9:
-        window.after(2000,ende)
+    falsche_antworten=["Nein","Falsch","versuchs das nächste mal"]#liste mit verschiedene variationen von antworten
+    rand_ant=falsche_antworten[random.randrange(0,3)]#wählt ein element von der falsche_antworten Liste aus
+    question.config(text=str(rand_ant))#Aktualisiert die Anzeigt und zeigt falsch an
+    window.after(1000,neue_frage)#nach 1 Sekunde wird die neue_frage() funktion aufgerufen
+    if index ==9:#Die If funktion prüft ob die zehnte frage angezeigt wurde und stoppt dann die eingabe
+        window.after(2000,ende)#Am ende wird Richtig oder falsch angezeigt und erst nach 2 sekunden wird das Ergebnis angezeigt
 
 
 
 
-#Diese Funktion zeigt wieder die Nächste frage an
-def reset_frage():
-    imported_questions="placeholder for the question"
-    question.config(text=imported_questions)
-    window.after(1500,reset_frage)
-
+#Diese Funktion zeigt am ende der Score an
 def ende():
-    endergebnis=Score
-    question.config(text='Dein Score beträgt:'+str(endergebnis))
-    #window.after(5000,window.destroy)
+    endergebnis=Score #Score wird in eine unabhängige variabel gespeichert
+    question.config(text='Dein Score beträgt:'+str(endergebnis))#Der Score wird angezeigt
     
 
-#Spielername wird damit abgefragt
+#Spielername abfrage
 current_player=input('Player name:')
 
 #Grafik einstellungen
@@ -130,15 +119,15 @@ window = tk.Tk()
 window.title('Wissen ist Macht')
 window.geometry('1280x720')
 #---------------------------------------------------------------------------------------------
-#Spieler code
+#Spieler placeholder
 player_name = tk.Label(window,text='Player:'+' '+current_player,font=('Arial',15))
 player_name.grid(row=0,column=0,sticky='NW')
 
-#Score code
+#Score placeholder
 score = tk.Label(window,text='Score:'+str(Score),font=('Arial',15))
 score.grid(row=0,column=4,sticky='NE')
 
-#Fragen_funktion
+#Fragen placeholder
 question = tk.Label(window,text=shown_questions,font=('Arial',20),bg="beige")
 question.grid(row=2,column=0,columnspan=5)
 
@@ -155,7 +144,7 @@ abstandmitte= tk.Label(window,text='',width=40,height=5)
 abstandmitte.grid(row=4,column=2)
 
 #Antwort Blöcke
-Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),bg='#ff6666',width=40,height=5,command=lambda:(scanner(possible_answer[0])))
+Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),bg='#ff6666',width=40,height=5,command=lambda:scanner(possible_answer[0]))
 Buttona.grid(row=4,column=0,padx=30)
 
 Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),bg='#458B74',width=40,height=5,command=lambda:scanner(possible_answer[1]))
