@@ -175,7 +175,7 @@ window.mainloop()
 
 
 
-
+#Frage 80,75,40
 
 
 
