@@ -1,6 +1,7 @@
 import tkinter as tk
 import random
 from questions_folder.questions import *
+from timer_highscore import ScoreTimer, start_quiz
 
 #Variabeln
 Score = 0 
@@ -86,8 +87,8 @@ window.geometry('1280x720')
 player_name = tk.Label(window,text='Player:'+' '+current_player,font=('Arial',15))
 player_name.grid(row=0,column=0,sticky='NW')
 #Score placeholder
-score = tk.Label(window,text='Score:'+str(Score),font=('Arial',15))
-score.grid(row=0,column=4,sticky='NE')
+score = tk.Label(window,text='Score: '+str(Score),font=('Arial',15))
+score.grid(row=0,column=5)
 #Fragen placeholder
 question = tk.Label(window,text=shown_questions,font=('Arial',20),bg="beige")
 question.grid(row=2,column=0,columnspan=5)
@@ -97,11 +98,11 @@ abstandzw_name_frage= tk.Label(window,text='',width=40,height=5)
 abstandzw_name_frage.grid(row=1,column=0,columnspan=2)
 abstandzw_frage_antwort= tk.Label(window,text='',width=40,height=15)
 abstandzw_frage_antwort.grid(row=3,column=0,columnspan=2)
-abstandmitte= tk.Label(window,text='',width=40,height=5)
+abstandmitte= tk.Label(window,text='',width=20,height=5)
 abstandmitte.grid(row=4,column=2)
 #Antwort Blöcke
 Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),bg='#ff6666',width=40,height=5,command=lambda:scanner(possible_answer[0]))
-Buttona.grid(row=4,column=0,padx=30)
+Buttona.grid(row=4,column=0,padx=80,pady=20)
 Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),bg='#458B74',width=40,height=5,command=lambda:scanner(possible_answer[1]))
 Buttonb.grid(row=4,column=4)
 Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),bg='skyblue',width=40,height=5,command=lambda:scanner(possible_answer[2]))
@@ -110,6 +111,11 @@ Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),bg='#a3
 Buttond.grid(row=5,column=4)
 
 erste_frage()
+if __name__ == '__main__':
+    score_timer = ScoreTimer()
+    score_timer.start_timer()
+
+    print(score_timer)
 window.mainloop()
 
 

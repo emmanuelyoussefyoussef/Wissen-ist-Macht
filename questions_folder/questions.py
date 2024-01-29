@@ -708,4 +708,4 @@ def get_random_questions():
     questions_keys = list(questions_dict.keys()) # holt die Fragen durch die Nummerierung (Schlüssel) aus dem Dictionary
     random_questions_keys = random.sample(questions_keys, 10) # zufällige Auswahl von 10 Fragen
     random_questions = {key: questions_dict[key] for key in random_questions_keys} # erstellt neues Dictionary mit den ausgewählten 10 Fragen
-    return random_questions # neues Dictionary wird zurückgegeben
+    return random_questions_keys ,random_questions # neues Dictionary wird zurückgegeben
