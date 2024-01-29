@@ -30,7 +30,7 @@ questions_dict = {
         'current_category': 'Sport'
     },
     5: {
-        'question': 'Wie heißt der Fußballspieler, der auf Vereins- und Notionalmannschaftsebene die meisten Titel gewonnen hat? (Stand 01.2024)',
+        'question': 'Wie heißt der Fußballspieler, der auf Vereins- und\nNotionalmannschaftsebene die meisten Titel gewonnen hat? (Stand 01.2024)',
         'possible_answers': ['Dani Alves', 'Andrés Iniesta', 'Lionel Messi', 'David Beckham'],
         'question_answer': 'Dani Alves',
         'picture': 'sports.jpg',
@@ -275,7 +275,7 @@ questions_dict = {
         'current_category': 'Geschichte'
     },
     40: {
-        'question': 'Welcher antike Herrscher führte die mächtige persische Armee in den Kriegen gegen die Griechen, einschließlich der Schlacht bei den Thermopylen?',
+        'question': 'Welcher antike Herrscher führte die mächtige persische Armee in den Kriegen\ngegen die Griechen, einschließlich der Schlacht bei den Thermopylen?',
         'possible_answers': ['Xerxes I.', 'Artaxerxes I.', 'Cyrus der Große', 'Darius I.'],
         'question_answer': 'Xerxes I.',
         'picture': 'history.jpg',
@@ -506,7 +506,7 @@ questions_dict = {
         'current_category': 'Informatik'
     },
     73: {
-        'question': 'Was ist ein Firewall in Bezug auf Computersicherheit?',
+        'question': 'Was ist eine Firewall in Bezug auf Computersicherheit?',
         'possible_answers': ['Ein Hardware-Tool zum Verbinden von Computern', 'Ein Schutzprogramm gegen Viren und Malware', 'Ein Sicherheitsprotokoll für drahtlose Netzwerke', 'Eine Sicherheitsbarriere zwischen einem internen Netzwerk und externen Netzwerken'],
         'question_answer': 'Eine Sicherheitsbarriere zwischen einem internen Netzwerk und externen Netzwerken',
         'picture': 'informatics.jpg',
@@ -520,7 +520,7 @@ questions_dict = {
         'current_category': 'Informatik'
     },
     75: {
-        'question': ' Welche Programmiersprache wird häufig für die Entwicklung von mobilen Anwendungen verwendet, insbesondere für iOS-Geräte?',
+        'question': ' Welche Programmiersprache wird häufig für die Entwicklung von mobilen Anwendungen verwendet,\ninsbesondere für iOS-Geräte?',
         'possible_answers': ['Java', 'Swift', 'Python', 'C#'],
         'question_answer': 'Swift',
         'picture': 'informatics.jpg',
@@ -555,7 +555,7 @@ questions_dict = {
         'current_category': 'Informatik'
     },
     80: {
-        'question': 'Welcher Begriff beschreibt eine Sammlung von Anweisungen oder Befehlen, die eine bestimmte Aufgabe oder Funktion ausführen?',
+        'question': 'Welcher Begriff beschreibt eine Sammlung von Anweisungen oder Befehlen,\ndie eine bestimmte Aufgabe oder Funktion ausführen?',
         'possible_answers': ['Funktion', ' Klasse', 'Methode', 'Algorithmus'],
         'question_answer': 'Funktion',
         'picture': 'informatics.jpg',
@@ -708,4 +708,4 @@ def get_random_questions():
     questions_keys = list(questions_dict.keys()) # holt die Fragen durch die Nummerierung (Schlüssel) aus dem Dictionary
     random_questions_keys = random.sample(questions_keys, 10) # zufällige Auswahl von 10 Fragen
     random_questions = {key: questions_dict[key] for key in random_questions_keys} # erstellt neues Dictionary mit den ausgewählten 10 Fragen
-    return random_questions_keys ,random_questions # neues Dictionary wird zurückgegeben
+    return random_questions # neues Dictionary wird zurückgegeben

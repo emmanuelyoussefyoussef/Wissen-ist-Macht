@@ -1,6 +1,6 @@
 import time
 import threading
-import questions
+from questions_folder.questions import *
 
 class ScoreTimer:
     def __init__(self):
@@ -48,7 +48,7 @@ class ScoreTimer:
         return f'{hours:02}:{minutes:02}:{seconds:02}'
 
 def start_quiz(timer):
-    questions_dict = questions.get_random_questions()
+    questions_dict = get_random_questions()
 
     for question_number, question_info in questions_dict.items():
         # Setze den Timer und Score für jede Frage zurück
@@ -57,7 +57,7 @@ def start_quiz(timer):
 
         question = question_info['question']
         answers = question_info['possible_answers']
-        category = question_info['category']
+        category = question_info['current_category']
 
         print(f'\nFrage {question_number} ({category}): {question}')
         for i, answer in enumerate(answers, start=1):
