@@ -3,7 +3,7 @@ from PIL import Image, ImageTk
 
 def zeige_bild():
     fenster = tk.Tk() #erstellt tk Fenster
-    bild = Image.open("img\history.jpg") # öffnet das Bild
+    bild = Image.open("questions_folder\img\history.jpg") # öffnet das Bild
     bild_tk = ImageTk.PhotoImage(bild) # konvertiert das Bild
 
     bild_label = tk.Label(fenster, image=bild_tk) # erstellt ein Label um das Bild anzuzeigen
@@ -14,4 +14,3 @@ def zeige_bild():
     fenster.mainloop() # zeigt das tk Fenster an
 
 zeige_bild()
-
