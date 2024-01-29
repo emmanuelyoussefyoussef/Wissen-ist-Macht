@@ -6,9 +6,9 @@ def start_quiz():
     for question_number, question_info in questions_dict.items():
         question = question_info['question']
         answers = question_info['possible_answers']
-        correct_answer = question_info['right_answer']
+        correct_answer = question_info['question_answer']
         image = question_info['picture']
-        Category = question_info['category']
+        Category = question_info['current_category']
 
         print(f'\nFrage {question_number} ({Category}): {question}')
         for i, answer in enumerate(answers, start=1):
