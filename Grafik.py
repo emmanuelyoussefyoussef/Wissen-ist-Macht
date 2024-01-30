@@ -28,10 +28,11 @@ def neue_frage():
     global imported_questions
     global correct_questions
     global answer
-    shown_questions=imported_questions[key[index]]['question'] #aus der imported_questions dict wird ein element ausgesucht und eingespeichert
-    print(index,key[index],shown_questions)#Dient zur kontrolle
-    question.config(text=shown_questions)#Das bearbeitet den Text und aktualisiert die anzeige
-    auswahl()
+    if index <= 9:
+        shown_questions=imported_questions[key[index]]['question'] #aus der imported_questions dict wird ein element ausgesucht und eingespeichert
+        print(index,key[index],shown_questions)#Dient zur kontrolle
+        question.config(text=shown_questions)#Das bearbeitet den Text und aktualisiert die anzeige
+        auswahl()
 #Diese FRage wird ein mal aufgerufen um die erste frage zu bekommen am anfang dann ist die Funktion nutzlos
 def erste_frage():
     global switcher
