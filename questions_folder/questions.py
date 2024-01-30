@@ -17,7 +17,7 @@ questions_dict = {
     },
     3: {
         'question': 'Welche beiden NFL-Teams haben die meisten Super-Bowl Siege?',
-        'possible_answers': ['Kansas City Chiefs und green Bay Packers', 'San Francisco 49ers und Kansas City Chiefs', 'New England Patriots und New York Jets', 'Pittsburgh Steelers und New England Patriots'],
+        'possible_answers': ['Kansas City Chiefs, \nGreen Bay Packers', 'San Francisco 49ers, \nKansas City Chiefs', 'New England Patriots, \nNew York Jets', 'Pittsburgh Steelers, \nNew England Patriots'],
         'question_answer': 'Pittsburgh Steelers und New England Patriots',
         'picture': 'sports.jpg',
         'current_category': 'Sport'
@@ -30,7 +30,7 @@ questions_dict = {
         'current_category': 'Sport'
     },
     5: {
-        'question': 'Wie heißt der Fußballspieler, der auf Vereins- und\nNotionalmannschaftsebene die meisten Titel gewonnen hat? (Stand 01.2024)',
+        'question': 'Wie heißt der Fußballspieler, der auf Vereins- und \nNotionalmannschaftsebene die meisten Titel gewonnen hat? (Stand 01.2024)',
         'possible_answers': ['Dani Alves', 'Andrés Iniesta', 'Lionel Messi', 'David Beckham'],
         'question_answer': 'Dani Alves',
         'picture': 'sports.jpg',
@@ -275,7 +275,7 @@ questions_dict = {
         'current_category': 'Geschichte'
     },
     40: {
-        'question': 'Welcher antike Herrscher führte die mächtige persische Armee in den Kriegen\ngegen die Griechen, einschließlich der Schlacht bei den Thermopylen?',
+        'question': 'Welcher antike Herrscher führte die mächtige persische Armee in den Kriegen \ngegen die Griechen, einschließlich der Schlacht bei den Thermopylen?',
         'possible_answers': ['Xerxes I.', 'Artaxerxes I.', 'Cyrus der Große', 'Darius I.'],
         'question_answer': 'Xerxes I.',
         'picture': 'history.jpg',
@@ -360,7 +360,7 @@ questions_dict = {
     },
     52: {
         'question': 'Was ist ein Komet',
-        'possible_answers': ['Ein kleiner Planet', 'Eine schmutzige Schneekugel aus Eis und Staub', 'Ein felsiger Himmeslkörper', 'Ein wandelnder Stern'],
+        'possible_answers': ['Ein kleiner Planet', 'Eine schmutzige Schneekugel \naus Eis und Staub', 'Ein felsiger Himmeslkörper', 'Ein wandelnder Stern'],
         'question_answer': 'Eine schmutzige Schneekugel aus Eis und Staub',
         'picture': 'astronomy.jpg',
         'current_category': 'Astronomie'
@@ -374,7 +374,7 @@ questions_dict = {
     },
     54: {
         'question': 'Was verursacht eine Supernova?',
-        'possible_answers': ['Kollision von Planeten', 'Kollision von Galaxien', 'Erlöschung eines schwarzen Lochs', 'Explosion eines massiven Sterns'],
+        'possible_answers': ['Kollision von Planeten', 'Kollision von Galaxien', 'Erlöschung eines \nschwarzen Lochs', 'Explosion eines massiven Sterns'],
         'question_answer': 'Explosion eines massiven Sterns',
         'picture': 'astronomy.jpg',
         'current_category': 'Astronomie'
@@ -395,7 +395,7 @@ questions_dict = {
     },
     57: {
         'question': 'Was ist ein Exoplanet',
-        'possible_answers': ['Ein nicht entwickelter Planet', 'Ein Mond eines anderen Planeten', 'Ein Planet außerhalb unseres Sonnensystems', 'Ein künstlich geschaffener Himmelskörper'],
+        'possible_answers': ['Ein nicht entwickelter \nPlanet', 'Ein Mond eines \nanderen Planeten', 'Ein Planet außerhalb \nunseres Sonnensystems', 'Ein künstlich geschaffener \nHimmelskörper'],
         'question_answer': 'Ein Planet außerhalb unseres Sonnensystems',
         'picture': 'astronomy.jpg',
         'categoy': 'Astronomie'
@@ -500,14 +500,14 @@ questions_dict = {
     },
     72: {
         'question': 'Was ist der Zweck eines Betriebssystems?',
-        'possible_answers': ['Ausführung von Anwendungsprogrammen', 'Verwaltung von Hardware-Ressourcen', 'Darstellung von grafischen Benutzeroberflächen', 'Netzwerkkommunikation'],
+        'possible_answers': ['Ausführung von Anwendungsprogrammen', 'Verwaltung von \nHardware-Ressourcen', 'Darstellung von grafischen \nBenutzeroberflächen', 'Netzwerkkommunikation'],
         'question_answer': 'Verwaltung von Hardware-Ressourcen',
         'picture': 'informatics.jpg',
         'current_category': 'Informatik'
     },
     73: {
         'question': 'Was ist eine Firewall in Bezug auf Computersicherheit?',
-        'possible_answers': ['Ein Hardware-Tool zum Verbinden von Computern', 'Ein Schutzprogramm gegen Viren und Malware', 'Ein Sicherheitsprotokoll für drahtlose Netzwerke', 'Eine Sicherheitsbarriere zwischen einem internen Netzwerk und externen Netzwerken'],
+        'possible_answers': ['Ein Hardware-Tool zum \nVerbinden von Computern', 'Ein Schutzprogramm gegen \nViren und Malware', 'Ein Sicherheitsprotokoll für \ndrahtlose Netzwerke', 'Eine Sicherheitsbarriere zwischen einem \ninternen Netzwerk und externen Netzwerken'],
         'question_answer': 'Eine Sicherheitsbarriere zwischen einem internen Netzwerk und externen Netzwerken',
         'picture': 'informatics.jpg',
         'current_category': 'Informatik'
@@ -528,7 +528,7 @@ questions_dict = {
     },
     76: {
         'question': 'Was ist ein DNS (Domain Name System)?',
-        'possible_answers': ['Ein Netzwerkprotokoll zur sicheren Datenübertragung', 'Ein Datenbankmanagementsystem', 'Ein Protokoll für die E-Mail-Kommunikation', 'Ein System zur Auflösung von Domainnamen in IP-Adressen'],
+        'possible_answers': ['Ein Netzwerkprotokoll zur \nsicheren Datenübertragung', 'Ein Datenbankmanagementsystem', 'Ein Protokoll für die \nE-Mail-Kommunikation', 'Ein System zur Auflösung von \nDomainnamen in IP-Adressen'],
         'question_answer': 'Ein System zur Auflösung von Domainnamen in IP-Adressen',
         'picture': 'informatics.jpg',
         'current_category': 'Informatik'
@@ -542,7 +542,7 @@ questions_dict = {
     },
     78: {
         'question': 'Was ist ein Compiler in der Informatik?',
-        'possible_answers': ['Ein Gerät zur Datenkompression', 'Ein Programm, das Code in Maschinensprache übersetzt', 'Ein Sicherheitsprogramm gegen Malware', 'Ein Netzwerkprotokoll für sichere Verbindungen'],
+        'possible_answers': ['Ein Gerät zur Datenkompression', 'Ein Programm, das Code in \nMaschinensprache übersetzt', 'Ein Sicherheitsprogramm gegen Malware', 'Ein Netzwerkprotokoll für \nsichere Verbindungen'],
         'question_answer': 'Ein Programm, das Code in Maschinensprache übersetzt',
         'picture': 'informatics.jpg',
         'current_category': 'Informatik'
