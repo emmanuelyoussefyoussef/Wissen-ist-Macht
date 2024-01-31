@@ -51,7 +51,7 @@ questions_dict = {
         'current_category': 'Sport'
     },
     8: {
-        'question': 'Welcher NFL-Quarterback hat in seier Karriere die meisten Touchdowns geworfen? (Stand 01.2024)',
+        'question': 'Welcher NFL-Quarterback hat in seiner Karriere die meisten Touchdowns geworfen? (Stand 01.2024)',
         'possible_answers': ['Joe Montana', 'Jimmy Garoppolo', 'Patrick Mahomes', 'Tom Brady'],
         'question_answer': 'Tom Brady',
         'picture': 'sports.jpg',
