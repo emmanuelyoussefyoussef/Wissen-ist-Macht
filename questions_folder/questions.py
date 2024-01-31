@@ -122,7 +122,7 @@ questions_dict = {
     },
     18: {
         'question': 'Welcher Schriftzug steht über dem deutschen Bundestag?',
-        'possible_answers': ['Einigkeit, Recht, Freiheit', '1894 (Baujahr)', 'Deutsches Vaterland', 'Dem Deutschen Volke'],
+        'possible_answers': ['Einigkeit, Recht, Freiheit', '1894 (Baujahr)', 'Deutsches Vaterland', 'Dem deutschen Volke'],
         'question_answer': 'Dem deutschen Volke',
         'picture': 'general_knowledge.jpg',
         'current_category': 'Allgemeinbildung'
