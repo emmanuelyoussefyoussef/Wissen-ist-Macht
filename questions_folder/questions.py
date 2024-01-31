@@ -612,7 +612,7 @@ questions_dict = {
     },
     88: {
         'question': 'Welches Tier kann seinen Schwanz abwerfen, um Feinde zu täuschen?',
-        'possible_answers': ['Gecko', 'Leguan', 'Eidechse', 'Lalamander'],
+        'possible_answers': ['Gecko', 'Leguan', 'Eidechse', 'Salamander'],
         'question_answer': 'Eidechse',
         'picture': 'animals.jpg',
         'current_category': 'Tiere'
