@@ -1,12 +1,11 @@
 import tkinter as tk
 import random
+#from testing import hoch_timer
 from questions_folder.questions import *
 from timer_highscore import ScoreTimer, start_quiz
-from PIL import Image, ImageTk
-import time
 
 #Variabeln
-Score = 0 
+Score = 10
 richtige_antwort=''
 index=0
 switcher=True
@@ -19,6 +18,13 @@ shown_questions=''
 correct_questions=''
 answer=''
 possible_answer=''
+
+#def hoch_timer_and_update_score(seconds):
+    #timer.config(text=f'Timer:{seconds} s')
+def hoch_timer(seconds):
+    timer.config(text=f'Timer: {seconds} s')
+    window.after(1000, hoch_timer, seconds +1)
+    
 #Diese Funktionen verteilt die Antworten auf den Buttons
 def auswahl():
     global possible_answer
@@ -83,14 +89,6 @@ def ende():
     question.config(text='Dein Score beträgt:'+str(endergebnis))#Der Score wird angezeigt
 
 
-
-
-
-
-
-
-
-
 def start_game():
     global player_name_entry, player_name_label
     player = player_name_entry.get()
@@ -98,23 +96,31 @@ def start_game():
         global player_name_var
         player_name_var = player
         player_name_label = tk.Label(window, text=player, font=('Arial', 15))
-        player_name_label.grid(row=0, column=0, sticky='NW')
+        player_name_label.grid(row=0, column=2, sticky='NW')
         player_name_entry.grid_forget()
         start_button.grid_forget()
         erste_frage()
+
+        hoch_timer(0)
 #Spielername abfrage
-#current_player=input('Player name:')
+
 #Grafik einstellungen
 window = tk.Tk()
 window.title('Wissen ist Macht')
 window.geometry('1280x720')
 #---------------------------------------------------------------------------------------------
 #Spieler placeholder
-player_name = tk.Entry(window,text='Player:'+''+'player',font=('Arial',15))
-player_name.grid(row=0,column=0,sticky='NW')
+#player_name = tk.Label(window,text='Player:'+' '+'player',font=('Arial',15))
+#player_name.grid(row=0,column=0,sticky='NW')
+
+#timer placeholder
+timer = tk.Label(window,text='Timer: ',font=('Arial',15))
+timer.grid(row=0,column=0,sticky='NW')
+
+
 #Score placeholder
 score = tk.Label(window,text='Score: '+str(Score),font=('Arial',15))
-score.grid(row=0,column=5)
+score.grid(row=0,column=4)
 #Fragen placeholder
 question = tk.Label(window,text=shown_questions,font=('Arial',20),bg="beige")
 question.grid(row=2,column=0,columnspan=5)
@@ -139,29 +145,13 @@ Buttond.grid(row=5,column=4)
 
 
 
-
-
-
-
-
 player_name_entry = tk.Entry(window, text='Player:', font=('Arial', 15))
-player_name_entry.grid(row=0, column=0, sticky='NW')
+player_name_entry.grid(row=0, column=2, sticky='NW')
 
 start_button = tk.Button(window, text='Start Game', font=('Arial', 15), command=start_game)
 start_button.grid(row=0, column=1, sticky='NW')
 
 
-
-
-
-
-
-
-if __name__ == '__main__':
-    score_timer = ScoreTimer()
-    score_timer.start_timer()
-
-    print(score_timer)
 window.mainloop()
 
 
