@@ -59,7 +59,7 @@ questions_dict = {
     },
     9: {
         'question': 'Mit welchem Formel 1-Team ist Michael Schumacher 5 mal in Folge Weltmeister geworden?',
-        'possible_answers': ['Ferarri', 'Mercedes', 'Red Bull', 'BMW'],
+        'possible_answers': ['Ferrari', 'Mercedes', 'Red Bull', 'BMW'],
         'question_answer': 'Ferrari',
         'picture': 'sports.jpg',
         'current_category': 'Sport'
