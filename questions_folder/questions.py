@@ -458,7 +458,7 @@ questions_dict = {
     },
     66: {
         'question': 'Welche der folgenden Blumen repräsentiert normalerweise Frieden und Ruhe?',
-        'possible_answers': ['rose', 'Tulpe', 'Lilie', 'Kamille'],
+        'possible_answers': ['Rose', 'Tulpe', 'Lilie', 'Kamille'],
         'question_answer': 'Lilie',
         'picture': 'nature.jpg',
         'current_category': 'Natur'
