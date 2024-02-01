@@ -2,7 +2,7 @@ import tkinter as tk
 import random
 #from testing import hoch_timer
 from questions_folder.questions import *
-from timer_highscore import ScoreTimer, start_quiz
+#from timer_highscore import ScoreTimer, start_quiz
 
 #Variabeln
 Score = 10
