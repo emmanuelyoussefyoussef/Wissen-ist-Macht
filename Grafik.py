@@ -30,11 +30,6 @@ def hoch_timer(seconds):
         score.config(text='Score ' + str(Score))
     window.after(1000, hoch_timer, seconds +1)
 
-
-#def reset_timer_score():
-    #score.config(text='Score: ' + str(Score))
-    #hoch_timer(0)
-
     
 #Diese Funktionen verteilt die Antworten auf den Buttons
 def auswahl():
@@ -76,8 +71,7 @@ def richtige_antwort():
     if index ==9:#Die If funktion prüft ob die zehnte frage angezeigt wurde und stoppt dann die eingabe
         window.after(2000, ende)#Am ende wird Richtig oder falsch angezeigt und erst nach 2 sekunden wird das Ergebnis angezeigt
 
-    #reset_timer_score()
-        
+
 #diese funktion prüft ab ob die eingabe des spielers richtig ist    
 def scanner(antwort):
     global index
@@ -99,15 +93,11 @@ def falsche_antwort():
     if index ==9:#Die If funktion prüft ob die zehnte frage angezeigt wurde und stoppt dann die eingabe
         window.after(2000,ende)#Am ende wird Richtig oder falsch angezeigt und erst nach 2 sekunden wird das Ergebnis angezeigt 
 
-    #reset_timer_score()
-        
 #Diese Funktion zeigt am ende der Score an
 def ende():
     endergebnis=Score #Score wird in eine unabhängige variabel gespeichert
     question.config(text='Dein Score beträgt:'+str(endergebnis))#Der Score wird angezeigt
     
-    #reset_timer_score()
-
 def start_game():
     global player_name_entry, player_name_label
     player = player_name_entry.get()
