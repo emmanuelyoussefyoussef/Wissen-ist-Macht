@@ -19,11 +19,22 @@ correct_questions=''
 answer=''
 possible_answer=''
 
-#def hoch_timer_and_update_score(seconds):
-    #timer.config(text=f'Timer:{seconds} s')
+#Funktion Timer und ablaufender Score
 def hoch_timer(seconds):
+    global Score
     timer.config(text=f'Timer: {seconds} s')
+    
+    if seconds >= 10:
+      if (seconds - 10) % 2 == 0:
+        Score = max(1, Score -1)
+        score.config(text='Score ' + str(Score))
     window.after(1000, hoch_timer, seconds +1)
+
+
+#def reset_timer_score():
+    #score.config(text='Score: ' + str(Score))
+    #hoch_timer(0)
+
     
 #Diese Funktionen verteilt die Antworten auf den Buttons
 def auswahl():
@@ -43,6 +54,7 @@ def neue_frage():
         print(index,key[index],shown_questions)#Dient zur kontrolle
         question.config(text=shown_questions)#Das bearbeitet den Text und aktualisiert die anzeige
         auswahl()
+    
 #Diese FRage wird ein mal aufgerufen um die erste frage zu bekommen am anfang dann ist die Funktion nutzlos
 def erste_frage():
     global switcher
@@ -63,6 +75,9 @@ def richtige_antwort():
     window.after(1000,neue_frage)#Nach 1Sekunde wird die neue_frage() funktion aufgerufen
     if index ==9:#Die If funktion prüft ob die zehnte frage angezeigt wurde und stoppt dann die eingabe
         window.after(2000, ende)#Am ende wird Richtig oder falsch angezeigt und erst nach 2 sekunden wird das Ergebnis angezeigt
+
+    #reset_timer_score()
+        
 #diese funktion prüft ab ob die eingabe des spielers richtig ist    
 def scanner(antwort):
     global index
@@ -82,12 +97,16 @@ def falsche_antwort():
     question.config(text=str(rand_ant))#Aktualisiert die Anzeigt und zeigt falsch an
     window.after(1000,neue_frage)#nach 1 Sekunde wird die neue_frage() funktion aufgerufen
     if index ==9:#Die If funktion prüft ob die zehnte frage angezeigt wurde und stoppt dann die eingabe
-        window.after(2000,ende)#Am ende wird Richtig oder falsch angezeigt und erst nach 2 sekunden wird das Ergebnis angezeigt
+        window.after(2000,ende)#Am ende wird Richtig oder falsch angezeigt und erst nach 2 sekunden wird das Ergebnis angezeigt 
+
+    #reset_timer_score()
+        
 #Diese Funktion zeigt am ende der Score an
 def ende():
     endergebnis=Score #Score wird in eine unabhängige variabel gespeichert
     question.config(text='Dein Score beträgt:'+str(endergebnis))#Der Score wird angezeigt
-
+    
+    #reset_timer_score()
 
 def start_game():
     global player_name_entry, player_name_label
@@ -116,19 +135,19 @@ window = tk.Tk()
 window.title('Wissen ist Macht')
 window.geometry('1280x720')
 #---------------------------------------------------------------------------------------------
-#Spieler placeholder
-#player_name = tk.Label(window,text='Player:'+' '+'player',font=('Arial',15))
-#player_name.grid(row=0,column=0,sticky='NW')
+
 
 #timer placeholder
 timer = tk.Label(window,text='Timer: ',font=('Arial',15))
-
+#timer.grid(row=0,column=0,sticky='NW')
 
 
 #Score placeholder
 score = tk.Label(window,text='Score: '+str(Score),font=('Arial',15))
+#score.grid(row=0,column=4)
 #Fragen placeholder
 question = tk.Label(window,text=shown_questions,font=('Arial',20),bg="beige")
+#question.grid(row=2,column=0,columnspan=5)
 #---------------------------------------------------------------------------------------------
 #Abstände
 abstandzw_name_frage= tk.Label(window,text='',width=40,height=5)
@@ -140,8 +159,11 @@ abstandmitte.grid(row=4,column=2)
 #Antwort Blöcke
 
 Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),bg='#ff6666',width=40,height=5,command=lambda:scanner(possible_answer[0]))
+
 Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),bg='#458B74',width=40,height=5,command=lambda:scanner(possible_answer[1]))
+
 Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),bg='skyblue',width=40,height=5,command=lambda:scanner(possible_answer[2]))
+
 Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),bg='#a37d00',width=40,height=5,command=lambda:scanner(possible_answer[3]))
 
 
@@ -152,7 +174,6 @@ player_name_entry.grid(row=4, column=4)
 
 start_button = tk.Button(window, text='Start Game', font=('Arial', 15), command=start_game)
 start_button.grid(row=4, column=3)
-
 
 window.mainloop()
 
