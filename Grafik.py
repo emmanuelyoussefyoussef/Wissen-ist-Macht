@@ -99,6 +99,13 @@ def start_game():
         player_name_label.grid(row=0, column=2, sticky='NW')
         player_name_entry.grid_forget()
         start_button.grid_forget()
+        Buttona.grid(row=4,column=0,padx=80,pady=20)
+        Buttonb.grid(row=4,column=4)
+        Buttonc.grid(row=5,column=0)
+        Buttond.grid(row=5,column=4)
+        score.grid(row=0,column=4)
+        question.grid(row=2,column=0,columnspan=5)
+        timer.grid(row=0,column=0,sticky='NW')
         erste_frage()
 
         hoch_timer(0)
@@ -115,15 +122,13 @@ window.geometry('1280x720')
 
 #timer placeholder
 timer = tk.Label(window,text='Timer: ',font=('Arial',15))
-timer.grid(row=0,column=0,sticky='NW')
+
 
 
 #Score placeholder
 score = tk.Label(window,text='Score: '+str(Score),font=('Arial',15))
-score.grid(row=0,column=4)
 #Fragen placeholder
 question = tk.Label(window,text=shown_questions,font=('Arial',20),bg="beige")
-question.grid(row=2,column=0,columnspan=5)
 #---------------------------------------------------------------------------------------------
 #Abstände
 abstandzw_name_frage= tk.Label(window,text='',width=40,height=5)
@@ -133,23 +138,20 @@ abstandzw_frage_antwort.grid(row=3,column=0,columnspan=2)
 abstandmitte= tk.Label(window,text='',width=20,height=5)
 abstandmitte.grid(row=4,column=2)
 #Antwort Blöcke
+
 Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),bg='#ff6666',width=40,height=5,command=lambda:scanner(possible_answer[0]))
-Buttona.grid(row=4,column=0,padx=80,pady=20)
 Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),bg='#458B74',width=40,height=5,command=lambda:scanner(possible_answer[1]))
-Buttonb.grid(row=4,column=4)
 Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),bg='skyblue',width=40,height=5,command=lambda:scanner(possible_answer[2]))
-Buttonc.grid(row=5,column=0)
 Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),bg='#a37d00',width=40,height=5,command=lambda:scanner(possible_answer[3]))
-Buttond.grid(row=5,column=4)
 
 
 
 
 player_name_entry = tk.Entry(window, text='Player:', font=('Arial', 15))
-player_name_entry.grid(row=0, column=2, sticky='NW')
+player_name_entry.grid(row=4, column=4)
 
 start_button = tk.Button(window, text='Start Game', font=('Arial', 15), command=start_game)
-start_button.grid(row=0, column=1, sticky='NW')
+start_button.grid(row=4, column=3)
 
 
 window.mainloop()
