@@ -128,7 +128,7 @@ window.title('Wissen ist Macht')
 window.geometry('1280x720')
 #---------------------------------------------------------------------------------------------
 #Das Hintergrundabild importiert und hinzugefügt
-importiertes_bild= Image.open("hintergrund2.jpg")
+importiertes_bild= Image.open("img/background.png")
 importiertes_bild= importiertes_bild.resize((1280, 720))
 
 hintergrund_bild= ImageTk.PhotoImage(importiertes_bild)
