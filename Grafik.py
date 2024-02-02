@@ -3,6 +3,8 @@ import random
 #from testing import hoch_timer
 from questions_folder.questions import *
 #from timer_highscore import ScoreTimer, start_quiz
+from PIL import Image, ImageTk
+import keyboard
 
 #Variabeln
 Score = 10
@@ -112,8 +114,8 @@ def start_game():
         Buttonb.grid(row=4,column=4)
         Buttonc.grid(row=5,column=0)
         Buttond.grid(row=5,column=4)
-        score.grid(row=0,column=4)
-        question.grid(row=2,column=0,columnspan=5)
+        score.grid(row=0,column=4,sticky='NE')
+        question.grid(row=2,column=0,columnspan=6)
         timer.grid(row=0,column=0,sticky='NW')
         erste_frage()
 
@@ -125,7 +127,15 @@ window = tk.Tk()
 window.title('Wissen ist Macht')
 window.geometry('1280x720')
 #---------------------------------------------------------------------------------------------
+#Das Hintergrundabild importiert und hinzugefügt
+importiertes_bild= Image.open("hintergrund2.jpg")
+importiertes_bild= importiertes_bild.resize((1280, 720))
 
+hintergrund_bild= ImageTk.PhotoImage(importiertes_bild)
+
+hintergrund_placeholder = tk.Label(window, image=hintergrund_bild)
+hintergrund_placeholder.place(x=0, y=0, relwidth=1, relheight=1)
+hintergrund_placeholder.lift()
 
 #timer placeholder
 timer = tk.Label(window,text='Timer: ',font=('Arial',15))
@@ -136,16 +146,23 @@ timer = tk.Label(window,text='Timer: ',font=('Arial',15))
 score = tk.Label(window,text='Score: '+str(Score),font=('Arial',15))
 #score.grid(row=0,column=4)
 #Fragen placeholder
-question = tk.Label(window,text=shown_questions,font=('Arial',20),bg="beige")
+question = tk.Label(window,text=shown_questions,font=('Arial',20))
+#question.lift(aboveThis=hintergrund_placeholder)
 #question.grid(row=2,column=0,columnspan=5)
 #---------------------------------------------------------------------------------------------
 #Abstände
 abstandzw_name_frage= tk.Label(window,text='',width=40,height=5)
 abstandzw_name_frage.grid(row=1,column=0,columnspan=2)
+abstandzw_name_frage.lower(belowThis=hintergrund_placeholder)
 abstandzw_frage_antwort= tk.Label(window,text='',width=40,height=15)
 abstandzw_frage_antwort.grid(row=3,column=0,columnspan=2)
+abstandzw_frage_antwort.lower(belowThis=hintergrund_placeholder)
 abstandmitte= tk.Label(window,text='',width=20,height=5)
 abstandmitte.grid(row=4,column=2)
+abstandmitte.lower(belowThis=hintergrund_placeholder)
+abstand_score_rand=tk.Label(window,text='',width=10,height=5)
+abstand_score_rand.grid(row=0,column=5)
+abstand_score_rand.lower(belowThis=hintergrund_placeholder)
 #Antwort Blöcke
 
 Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),bg='#ff6666',width=40,height=5,command=lambda:scanner(possible_answer[0]))
@@ -159,11 +176,16 @@ Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),bg='#a3
 
 
 
+
 player_name_entry = tk.Entry(window, text='Player:', font=('Arial', 15))
 player_name_entry.grid(row=4, column=4)
+player_name_entry.lift(aboveThis=hintergrund_placeholder)
 
 start_button = tk.Button(window, text='Start Game', font=('Arial', 15), command=start_game)
 start_button.grid(row=4, column=3)
+
+
+
 
 window.mainloop()
 
