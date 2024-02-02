@@ -7,13 +7,15 @@ from dotenv import load_dotenv
 
 
 intents = discord.Intents.all()
-intents.voice_states = True
 
 
 bot = discord.Bot( 
     intents=intents, 
     debug_guildes=["debug_guildes"]
 )
+
+
+player_name_var = None
 
 
 @bot.event
@@ -31,11 +33,13 @@ async def stop(ctx):
     await bot.close()
 
 
-# Quiz ausführen
 @bot.slash_command(description='Führt das Quiz aus.')
-async def wim(ctx, current_player: str):
+async def wim(ctx, player_name_entry: str):
+    global player_name_var
+    player_name_var = player_name_entry  # Speichere den Spielername in der globalen Variable
     subprocess.Popen(['python', r'C:\Users\larsr\iCloudDrive\Python\Wissen-ist-Macht\Grafik.py'])
     await ctx.send('Das Quiz wurde gestartet!')
+    print(f"Player Name: {player_name_var}")
 
 
 load_dotenv()
