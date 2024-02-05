@@ -5,6 +5,7 @@ from questions_folder.questions import *
 #from timer_highscore import ScoreTimer, start_quiz
 from PIL import Image, ImageTk
 import keyboard
+from img import *
 
 #Variabeln
 Score = 10
@@ -97,11 +98,22 @@ def falsche_antwort():
 
 #Diese Funktion zeigt am ende der Score an
 def ende():
+    spiel_bild = Image.open("img/score.jpg")
+    spiel_bild = spiel_bild.resize((1280, 720))
+    hintergrund_bild_spiel = ImageTk.PhotoImage(spiel_bild)
+    hintergrund_placeholder.configure(image=hintergrund_bild_spiel)
+    hintergrund_placeholder.image = hintergrund_bild_spiel
+    
+    Buttona.lower()
+    Buttonb.lower()
+    Buttonc.lower()
+    Buttond.lower()
+
     endergebnis=Score #Score wird in eine unabhängige variabel gespeichert
     question.config(text='Dein Score beträgt:'+str(endergebnis))#Der Score wird angezeigt
     
 def start_game():
-    global player_name_entry, player_name_label
+    global player_name_entry, player_name_label, player
     player = player_name_entry.get()
     if player:
         global player_name_var
@@ -117,8 +129,14 @@ def start_game():
         score.grid(row=0,column=4,sticky='NE')
         question.grid(row=2,column=0,columnspan=6)
         timer.grid(row=0,column=0,sticky='NW')
+        #das hintergrundsbild wird aktualisiert
+        spiel_bild = Image.open("img/background.jpg")
+        spiel_bild = spiel_bild.resize((1280, 720))
+        hintergrund_bild_spiel = ImageTk.PhotoImage(spiel_bild)
+        hintergrund_placeholder.configure(image=hintergrund_bild_spiel)
+        hintergrund_placeholder.image = hintergrund_bild_spiel
+        
         erste_frage()
-
         hoch_timer(0)
 #Spielername abfrage
 
@@ -128,12 +146,12 @@ window.title('Wissen ist Macht')
 window.geometry('1280x720')
 #---------------------------------------------------------------------------------------------
 #Das Hintergrundabild importiert und hinzugefügt
-importiertes_bild= Image.open("Wissen-ist-Macht/img/background.jpg")
-importiertes_bild= importiertes_bild.resize((1280, 720))
+spiel_bild= Image.open("img/start.PNG")
+spiel_bild= spiel_bild.resize((1280, 720))
 
-hintergrund_bild= ImageTk.PhotoImage(importiertes_bild)
+hintergrund_bild_spiel= ImageTk.PhotoImage(spiel_bild)
 
-hintergrund_placeholder = tk.Label(window, image=hintergrund_bild)
+hintergrund_placeholder = tk.Label(window, image=hintergrund_bild_spiel)
 hintergrund_placeholder.place(x=0, y=0, relwidth=1, relheight=1)
 hintergrund_placeholder.lift()
 
@@ -163,6 +181,9 @@ abstandmitte.lower(belowThis=hintergrund_placeholder)
 abstand_score_rand=tk.Label(window,text='',width=10,height=5)
 abstand_score_rand.grid(row=0,column=5)
 abstand_score_rand.lower(belowThis=hintergrund_placeholder)
+abstandzw_regeln_spielername=tk.Label(window,text='',width=15,height=6)
+abstandzw_regeln_spielername.grid(row=7,column=4)
+abstandzw_regeln_spielername.lower()
 #Antwort Blöcke
 
 Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[0]))
@@ -178,11 +199,11 @@ Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),fg='whi
 
 
 player_name_entry = tk.Entry(window, text='Player:', font=('Arial', 15),fg='white',bg='black')
-player_name_entry.grid(row=5, column=5)
+player_name_entry.grid(row=8, column=5)
 player_name_entry.lift(aboveThis=hintergrund_placeholder)
 
 start_button = tk.Button(window, text='Start Game', font=('Arial', 15),fg='white',bg='black', command=start_game)
-start_button.grid(row=5, column=4)
+start_button.grid(row=8, column=4)
 
 
 
