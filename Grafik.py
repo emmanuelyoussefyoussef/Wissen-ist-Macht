@@ -26,8 +26,8 @@ def hoch_timer(seconds):
     global Score
     timer.config(text=f'Timer: {seconds} s')
     
-    if seconds >= 10:
-      if (seconds - 10) % 2 == 0:
+    if seconds >= 12:
+      if (seconds - 12) % 2 == 0:
         Score = max(1, Score -1)
         score.config(text='Score ' + str(Score))
     window.after(1000, hoch_timer, seconds +1)
@@ -62,7 +62,7 @@ def erste_frage():
 #Score update funktion
 def update_score():
     global Score
-    Score = Score+1
+    Score = 10
     score.config(text='Score: ' + str(Score))#Hier wird die Score Anzeige aktualisiert und erneut angezeigt
 #Diese Funktion zeigt das Ergebnis Richtig an
 def richtige_antwort():
@@ -88,6 +88,7 @@ def scanner(antwort):
 def falsche_antwort():
     global index
     window.bell()
+    update_score()
     falsche_antworten=["Nein","Falsch","versuchs das nächste mal"]#liste mit verschiedene variationen von antworten
     rand_ant=falsche_antworten[random.randrange(0,3)]#wählt ein element von der falsche_antworten Liste aus
     question.config(text=str(rand_ant))#Aktualisiert die Anzeigt und zeigt falsch an
