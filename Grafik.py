@@ -185,19 +185,12 @@ abstand_score_rand.lower(belowThis=hintergrund_placeholder)
 abstandzw_regeln_spielername=tk.Label(window,text='',width=15,height=6)
 abstandzw_regeln_spielername.grid(row=7,column=4)
 abstandzw_regeln_spielername.lower()
+
 #Antwort Blöcke
-
 Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[0]))
-
 Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[1]))
-
 Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[2]))
-
 Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[3]))
-
-
-
-
 
 player_name_entry = tk.Entry(window, text='Player:', font=('Arial', 15),fg='white',bg='black')
 player_name_entry.grid(row=8, column=5)
@@ -206,11 +199,12 @@ player_name_entry.lift(aboveThis=hintergrund_placeholder)
 start_button = tk.Button(window, text='Start Game', font=('Arial', 15),fg='white',bg='black', command=start_game)
 start_button.grid(row=8, column=4)
 
+def f(name ="Max"):
+    print("übergeberner Name " + name)
+    # player_name_label = name
+    
+    window.mainloop()
 
-
-
-window.mainloop()
-
-
-
-#Frage 80,75,40
+if __name__ == "__main__":
+    # Die Funktion wird nur ausgeführt, wenn die Datei direkt ausgeführt wird
+    f()
