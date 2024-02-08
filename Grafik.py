@@ -199,7 +199,7 @@ player_name_entry.lift(aboveThis=hintergrund_placeholder)
 start_button = tk.Button(window, text='Start Game', font=('Arial', 15),fg='white',bg='black', command=start_game)
 start_button.grid(row=8, column=4)
 
-def f(name ="Max"):
+def f(name =""):
     print("übergeberner Name " + name)
     # player_name_label = name
     
@@ -207,4 +207,4 @@ def f(name ="Max"):
 
 if __name__ == "__main__":
     # Die Funktion wird nur ausgeführt, wenn die Datei direkt ausgeführt wird
-    windwo.mainloop()
+    window.mainloop()
