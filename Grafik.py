@@ -131,7 +131,7 @@ def start_game():
         question.grid(row=2,column=0,columnspan=6)
         timer.grid(row=0,column=0,sticky='NW')
         #das hintergrundsbild wird aktualisiert
-        spiel_bild = Image.open("img/background.jpg")
+        spiel_bild = Image.open("img/background1.jpg")
         spiel_bild = spiel_bild.resize((1280, 720))
         hintergrund_bild_spiel = ImageTk.PhotoImage(spiel_bild)
         hintergrund_placeholder.configure(image=hintergrund_bild_spiel)
@@ -188,8 +188,8 @@ abstandzw_regeln_spielername.lower()
 
 #Antwort Blöcke
 Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[0]))
-Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[1]))
-Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[2]))
+Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),fg='black',bg='darkred',width=40,height=5,command=lambda:scanner(possible_answer[1]))
+Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),fg='black',bg='darkred',width=40,height=5,command=lambda:scanner(possible_answer[2]))
 Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[3]))
 
 player_name_entry = tk.Entry(window, text='Player:', font=('Arial', 15),fg='white',bg='black')
