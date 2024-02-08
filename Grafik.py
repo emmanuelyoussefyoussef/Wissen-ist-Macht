@@ -184,8 +184,7 @@ Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),fg='whi
 def f(name =""):
     print("Übergeberner Name " + name)
     def start_game():
-        global player_name_entry, player_name_label, player
-        global player_name_var
+        global player_name_entry, player_name_label, player, player_name_var
         player = name
         player_name_var = player
         player_name_label = tk.Label(window, text=player, font=('Arial', 18),fg='white',bg='black')
