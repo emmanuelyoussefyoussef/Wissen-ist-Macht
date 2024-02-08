@@ -129,33 +129,6 @@ def ende():
         saved_scores.append(total_score)
     endergebnis=sum(saved_scores) #Score wird in eine unabhängige variabel gespeichert
     question.config(text='Dein Score beträgt:'+str(endergebnis))#Der Score wird angezeigt
-    
-def start_game():
-    global player_name_entry, player_name_label, player
-    player = player_name_entry.get()
-    if player:
-        global player_name_var
-        player_name_var = player
-        player_name_label = tk.Label(window, text=player, font=('Arial', 18),fg='white',bg='black')
-        player_name_label.grid(row=0, column=2, sticky='NW')
-        player_name_entry.grid_forget()
-        start_button.grid_forget()
-        Buttona.grid(row=3,column=0,padx=80,pady=20)
-        Buttonb.grid(row=3,column=4)
-        Buttonc.grid(row=4,column=0)
-        Buttond.grid(row=4,column=4)
-        score.grid(row=0,column=4,sticky='NE')
-        question.grid(row=2,column=0,columnspan=6)
-        timer.grid(row=0,column=0,sticky='NW')
-        #das hintergrundsbild wird aktualisiert
-        spiel_bild = Image.open("img/background1.jpg")
-        spiel_bild = spiel_bild.resize((1280, 720))
-        hintergrund_bild_spiel = ImageTk.PhotoImage(spiel_bild)
-        hintergrund_placeholder.configure(image=hintergrund_bild_spiel)
-        hintergrund_placeholder.image = hintergrund_bild_spiel
-        erste_frage()
-        hoch_timer(0)
-#Spielername abfrage
 
 #Grafik einstellungen
 window = tk.Tk()
@@ -204,24 +177,75 @@ abstandzw_regeln_spielername.lower()
 
 #Antwort Blöcke
 Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[0]))
-Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),fg='black',bg='darkred',width=40,height=5,command=lambda:scanner(possible_answer[1]))
-Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),fg='black',bg='darkred',width=40,height=5,command=lambda:scanner(possible_answer[2]))
+Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[1]))
+Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[2]))
 Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[3]))
 
-player_name_entry = tk.Entry(window, text='Player:', font=('Arial', 15),fg='white',bg='black')
-player_name_entry.grid(row=8, column=5)
-player_name_entry.lift(aboveThis=hintergrund_placeholder)
-
-start_button = tk.Button(window, text='Start Game', font=('Arial', 15),fg='white',bg='black', command=start_game)
-start_button.grid(row=8, column=4)
-
 def f(name =""):
-    print("übergeberner Name " + name)
-    # player_name_label = name
-    
+    print("Übergeberner Name " + name)
+    def start_game():
+        global player_name_entry, player_name_label, player
+        global player_name_var
+        player = name
+        player_name_var = player
+        player_name_label = tk.Label(window, text=player, font=('Arial', 18),fg='white',bg='black')
+        player_name_label.grid(row=0, column=2, sticky='NW')
+        start_button.grid_forget()
+        Buttona.grid(row=3,column=0,padx=80,pady=20)
+        Buttonb.grid(row=3,column=4)
+        Buttonc.grid(row=4,column=0)
+        Buttond.grid(row=4,column=4)
+        score.grid(row=0,column=4,sticky='NE')
+        question.grid(row=2,column=0,columnspan=6)
+        timer.grid(row=0,column=0,sticky='NW')
+        #das hintergrundsbild wird aktualisiert
+        spiel_bild = Image.open("img/background.jpg")
+        spiel_bild = spiel_bild.resize((1280, 720))
+        hintergrund_bild_spiel = ImageTk.PhotoImage(spiel_bild)
+        hintergrund_placeholder.configure(image=hintergrund_bild_spiel)
+        hintergrund_placeholder.image = hintergrund_bild_spiel
+        erste_frage()
+        hoch_timer(0)
+
+    player_name_entry = tk.Label(window, text=name, font=('Arial', 15),fg='white',bg='black')
+    player_name_entry.grid(row=8, column=5)
+    player_name_entry.lift(aboveThis=hintergrund_placeholder)
+    start_button = tk.Button(window, text='Start Game', font=('Arial', 15),fg='white',bg='black', command=start_game)
+    start_button.grid(row=8, column=4)
+
     window.mainloop()
 
 if __name__ == "__main__":
-    # Die Funktion wird nur ausgeführt, wenn die Datei direkt ausgeführt wird
-    window.mainloop()
+    def start_game():
+        global player_name_entry, player_name_label, player
+        player = player_name_entry.get()
+        if player:
+            global player_name_var
+            player_name_var = player
+            player_name_label = tk.Label(window, text=player, font=('Arial', 18),fg='white',bg='black')
+            player_name_label.grid(row=0, column=2, sticky='NW')
+            player_name_entry.grid_forget()
+            start_button.grid_forget()
+            Buttona.grid(row=3,column=0,padx=80,pady=20)
+            Buttonb.grid(row=3,column=4)
+            Buttonc.grid(row=4,column=0)
+            Buttond.grid(row=4,column=4)
+            score.grid(row=0,column=4,sticky='NE')
+            question.grid(row=2,column=0,columnspan=6)
+            timer.grid(row=0,column=0,sticky='NW')
+            #das hintergrundsbild wird aktualisiert
+            spiel_bild = Image.open("img/background.jpg")
+            spiel_bild = spiel_bild.resize((1280, 720))
+            hintergrund_bild_spiel = ImageTk.PhotoImage(spiel_bild)
+            hintergrund_placeholder.configure(image=hintergrund_bild_spiel)
+            hintergrund_placeholder.image = hintergrund_bild_spiel
+            erste_frage()
+            hoch_timer(0)
 
+    player_name_entry = tk.Entry(window, text="player", font=('Arial', 15),fg='white',bg='black')
+    player_name_entry.grid(row=8, column=5)
+    player_name_entry.lift(aboveThis=hintergrund_placeholder)
+    start_button = tk.Button(window, text='Start Game', font=('Arial', 15),fg='white',bg='black', command=start_game)
+    start_button.grid(row=8, column=4)
+
+    window.mainloop()
