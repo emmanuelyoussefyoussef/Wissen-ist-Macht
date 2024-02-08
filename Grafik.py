@@ -207,4 +207,4 @@ def f(name ="Max"):
 
 if __name__ == "__main__":
     # Die Funktion wird nur ausgeführt, wenn die Datei direkt ausgeführt wird
-    f()
+    windwo.mainloop()
