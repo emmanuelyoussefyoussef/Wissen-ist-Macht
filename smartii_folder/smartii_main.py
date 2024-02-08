@@ -29,6 +29,7 @@ async def stop(ctx):
 
 @bot.slash_command(description='Führt das Quiz aus.')
 async def wim(ctx, name="Max"):
+    await ctx.respond("Quiz has been started", ephemeral=True)
     f(name) 
 
 load_dotenv()
