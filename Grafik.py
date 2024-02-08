@@ -1,8 +1,6 @@
 import tkinter as tk
 import random
-#from testing import hoch_timer
 from questions_folder.questions import *
-#from timer_highscore import ScoreTimer, start_quiz
 from PIL import Image, ImageTk
 import keyboard
 from img import *
@@ -21,19 +19,24 @@ shown_questions=''
 correct_questions=''
 answer=''
 possible_answer=''
+#timer_running=False
+total_score = 0
+saved_scores=[]
 
 #Funktion Timer und ablaufender Score
 def hoch_timer(seconds):
     global Score
+    #global timer_running
     timer.config(text=f'Timer: {seconds} s')
     
     if seconds >= 12:
       if (seconds - 12) % 2 == 0:
         Score = max(1, Score -1)
         score.config(text='Score ' + str(Score))
+    #if timer_running:
     window.after(1000, hoch_timer, seconds +1)
 
-    
+
 #Diese Funktionen verteilt die Antworten auf den Buttons
 def auswahl():
     global possible_answer
@@ -65,10 +68,15 @@ def update_score():
     global Score
     Score = 10
     score.config(text='Score: ' + str(Score))#Hier wird die Score Anzeige aktualisiert und erneut angezeigt
+
 #Diese Funktion zeigt das Ergebnis Richtig an
 def richtige_antwort():
+    global Score
+    global total_score
     window.bell()#Sorgt für ein ton
     update_score()
+    total_score += Score
+    saved_scores.append(Score)
     question.config(text="Richtig")#Ändert die Frage und falls die antwort richtig war dann wird Richtig angezeigt
     window.after(1000,neue_frage)#Nach 1Sekunde wird die neue_frage() funktion aufgerufen
     if index ==9:#Die If funktion prüft ob die zehnte frage angezeigt wurde und stoppt dann die eingabe
@@ -88,8 +96,10 @@ def scanner(antwort):
 #Diese Funktion zeigt das Ergebnis Falsch an
 def falsche_antwort():
     global index
+    global Score
     window.bell()
     update_score()
+    Score = 10
     falsche_antworten=["Nein","Falsch","versuchs das nächste mal"]#liste mit verschiedene variationen von antworten
     rand_ant=falsche_antworten[random.randrange(0,3)]#wählt ein element von der falsche_antworten Liste aus
     question.config(text=str(rand_ant))#Aktualisiert die Anzeigt und zeigt falsch an
@@ -99,6 +109,9 @@ def falsche_antwort():
 
 #Diese Funktion zeigt am ende der Score an
 def ende():
+    global saved_scores
+    global total_score
+    global Score
     spiel_bild = Image.open("img/score.jpg")
     spiel_bild = spiel_bild.resize((1280, 720))
     hintergrund_bild_spiel = ImageTk.PhotoImage(spiel_bild)
@@ -110,7 +123,11 @@ def ende():
     Buttonc.lower()
     Buttond.lower()
 
-    endergebnis=Score #Score wird in eine unabhängige variabel gespeichert
+    if total_score==0:
+        saved_scores=[]
+    else:
+        saved_scores.append(total_score)
+    endergebnis=sum(saved_scores) #Score wird in eine unabhängige variabel gespeichert
     question.config(text='Dein Score beträgt:'+str(endergebnis))#Der Score wird angezeigt
     
 def start_game():
@@ -136,7 +153,6 @@ def start_game():
         hintergrund_bild_spiel = ImageTk.PhotoImage(spiel_bild)
         hintergrund_placeholder.configure(image=hintergrund_bild_spiel)
         hintergrund_placeholder.image = hintergrund_bild_spiel
-        
         erste_frage()
         hoch_timer(0)
 #Spielername abfrage
@@ -208,3 +224,4 @@ def f(name =""):
 if __name__ == "__main__":
     # Die Funktion wird nur ausgeführt, wenn die Datei direkt ausgeführt wird
     window.mainloop()
+
