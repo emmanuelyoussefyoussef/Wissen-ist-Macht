@@ -2,7 +2,6 @@ import tkinter as tk
 import random
 from questions_folder.questions import *
 from PIL import Image, ImageTk
-import keyboard
 from img import *
 
 # Variabeln
