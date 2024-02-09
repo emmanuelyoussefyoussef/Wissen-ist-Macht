@@ -47,7 +47,6 @@ def neue_frage():
 # Erste Frage, wird einmal aufgerufen
 def erste_frage():
     global switcher
-    global possible_answer
     if switcher ==True: # Funktion soll nur einmal aufgerufen werden
         neue_frage()
         switcher=False # if Funktion nicht mehr erfüllt
@@ -60,8 +59,7 @@ def update_score():
 
 # Anzeige richtiges Ergebnis
 def richtige_antwort():
-    global Score
-    global total_score
+    global Score,total_score
     window.bell() # Ton
     update_score()
     total_score += Score
@@ -84,8 +82,7 @@ def scanner(antwort):
     
 #Wird ausgeführt, wenn ein Ergbnis falsch ist
 def falsche_antwort():
-    global index
-    global Score
+    global index,Score
     window.bell()
     update_score()
     Score = 10
@@ -96,9 +93,7 @@ def falsche_antwort():
 
 # Am Ende wird der Score angezeigt
 def ende():
-    global saved_scores
-    global total_score
-    global Score
+    global saved_scores, total_score
     spiel_bild = Image.open("img/score.jpg")
     spiel_bild = spiel_bild.resize((1280, 720))
     hintergrund_bild_spiel = ImageTk.PhotoImage(spiel_bild)
@@ -166,22 +161,23 @@ timer = tk.Label(window,text='Timer: ',font=('Arial',15),fg='white',bg='black')
 # Score placeholder
 score = tk.Label(window,text='Score: '+str(Score),font=('Arial',15),fg='white',bg='black')
 question = tk.Label(window,text=shown_questions,font=('Arial',20),fg='white',bg='black')
-
-# Abstände
+# Abstände als Labels deklariert
 abstandzw_name_frage= tk.Label(window,text='',width=40,height=5)
-abstandzw_name_frage.grid(row=2,column=0,columnspan=2)
-abstandzw_name_frage.lower(belowThis=hintergrund_placeholder)
 abstandzw_frage_antwort= tk.Label(window,text='',width=40,height=15)
-abstandzw_frage_antwort.grid(row=3,column=0,columnspan=2)
-abstandzw_frage_antwort.lower(belowThis=hintergrund_placeholder)
 abstandmitte= tk.Label(window,text='',width=20,height=5)
-abstandmitte.grid(row=4,column=2)
-abstandmitte.lower(belowThis=hintergrund_placeholder)
 abstand_score_rand=tk.Label(window,text='',width=10,height=5)
-abstand_score_rand.grid(row=0,column=5)
-abstand_score_rand.lower(belowThis=hintergrund_placeholder)
 abstandzw_regeln_spielername=tk.Label(window,text='',width=15,height=6)
+#Abstände positionen festgelegt
+abstandzw_name_frage.grid(row=2,column=0,columnspan=2)
+abstandzw_frage_antwort.grid(row=3,column=0,columnspan=2)
+abstandmitte.grid(row=4,column=2)
+abstand_score_rand.grid(row=0,column=5)
 abstandzw_regeln_spielername.grid(row=7,column=4)
+#Abstände hinter dem Hintergrund festgesetzt
+abstandzw_name_frage.lower(belowThis=hintergrund_placeholder)
+abstandzw_frage_antwort.lower(belowThis=hintergrund_placeholder)
+abstandmitte.lower(belowThis=hintergrund_placeholder)
+abstand_score_rand.lower(belowThis=hintergrund_placeholder)
 abstandzw_regeln_spielername.lower()
 
 # Antwort Blöcke
@@ -194,7 +190,7 @@ Buttond= tk.Button(window,font=('Arial',14),fg='white',bg='black',width=40,heigh
 def f(name =""):
     print("Übergeberner Name " + name)
     def start_game():
-        global player_name_entry, player_name_label, player, player_name_var
+        global player_name_label, player, player_name_var
         player = name
         player_name_var = name
         player_name_label = tk.Label(window, text=player, font=('Arial', 18),fg='white',bg='black')
@@ -239,10 +235,9 @@ def f(name =""):
 # Funktion, um das Quiz über die IDE zu starten
 if __name__ == "__main__":
     def start_game():
-        global player_name_entry, player_name_label, player
+        global player_name_entry, player_name_label, player, player_name_var
         player = player_name_entry.get()
         if player:
-            global player_name_var
             player_name_var = player
             player_name_label = tk.Label(window, text=player, font=('Arial', 18),fg='white',bg='black')
             player_name_label.grid(row=0, column=0, columnspan=6, padx=0, pady=30, sticky='n')
