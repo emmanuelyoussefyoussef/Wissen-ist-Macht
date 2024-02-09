@@ -145,10 +145,6 @@ def hide_titlebar(event):
 window = tk.Tk()
 window.geometry('1280x740')
 
-# Funktionen an Ereignisse binden
-window.bind("<Map>", hide_titlebar)
-window.bind("<Configure>", hide_titlebar)
-
 # Background
 spiel_bild= Image.open("img/start.PNG")
 spiel_bild= spiel_bild.resize((1280, 720))
@@ -228,6 +224,12 @@ def f(name =""):
     close_button = tk.Button(window, text="X", bg="red", fg="white", command=window.destroy, width=2, height=1,  borderwidth=0, highlightthickness=0)
     close_button.place(relx=1, rely=0, anchor='ne')
 
+    # Funktionen an Ereignisse binden
+    black_bar.bind('<ButtonPress-1>', start_move)
+    black_bar.bind('<B1-Motion>', move_window)
+    window.bind("<Map>", hide_titlebar)
+    window.bind("<Configure>", hide_titlebar)
+
     # Quiz ausführen
     center(window)
     window.mainloop()
@@ -275,6 +277,12 @@ if __name__ == "__main__":
     # close-button
     close_button = tk.Button(window, text="X", bg="red", fg="white", command=window.destroy, width=2, height=1,  borderwidth=0, highlightthickness=0)
     close_button.place(relx=1, rely=0, anchor='ne')
+
+    # Funktionen an Ereignisse binden
+    black_bar.bind('<ButtonPress-1>', start_move)
+    black_bar.bind('<B1-Motion>', move_window)
+    window.bind("<Map>", hide_titlebar)
+    window.bind("<Configure>", hide_titlebar)
 
     # Quiz ausführen
     center(window)
