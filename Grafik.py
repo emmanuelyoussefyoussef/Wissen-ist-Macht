@@ -6,7 +6,7 @@ import keyboard
 from img import *
 
 #Variabeln
-Score = 10
+
 richtige_antwort=''
 index=0
 switcher=True
@@ -20,6 +20,7 @@ correct_questions=''
 answer=''
 possible_answer=''
 #timer_running=False
+Score = 10
 total_score = 0
 saved_scores=[]
 
@@ -100,9 +101,7 @@ def falsche_antwort():
     window.bell()
     update_score()
     Score = 10
-    falsche_antworten=["Nein","Falsch","versuchs das nächste mal"]#liste mit verschiedene variationen von antworten
-    rand_ant=falsche_antworten[random.randrange(0,3)]#wählt ein element von der falsche_antworten Liste aus
-    question.config(text=str(rand_ant))#Aktualisiert die Anzeigt und zeigt falsch an
+    question.config(text="Falsch")#Aktualisiert die Anzeigt und zeigt falsch an
     window.after(1000,neue_frage)#nach 1 Sekunde wird die neue_frage() funktion aufgerufen
     if index ==9:#Die If funktion prüft ob die zehnte frage angezeigt wurde und stoppt dann die eingabe
         window.after(2000,ende)#Am ende wird Richtig oder falsch angezeigt und erst nach 2 sekunden wird das Ergebnis angezeigt 
@@ -131,7 +130,7 @@ def ende():
     question.config(text='Dein Score beträgt:'+str(endergebnis))#Der Score wird angezeigt
 
 def center(win):
-    win.update_idletasks()
+    win.update_idletasks() #Anhand von der Bildschirmgröße wird der Seitenabstand berechnet (link,rechts,oben,unten) XXX
     width = win.winfo_width()
     height = win.winfo_height()
     screen_width = win.winfo_screenwidth()
@@ -152,7 +151,7 @@ def move_window(event):
     win_y = window.winfo_y() + (event.y - y)
     window.geometry(f'+{win_x}+{win_y}')
 
-# Funktion, um die Standard-Titelleiste zu verbergen
+# Funktion, um die Standard-Titelleiste zu verbergen XXX
 def hide_titlebar(event):
     window.overrideredirect(True)
 
@@ -195,10 +194,10 @@ abstandzw_regeln_spielername.grid(row=7,column=4)
 abstandzw_regeln_spielername.lower()
 
 # Antwort Blöcke
-Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[0]))
-Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),fg='black',bg='darkred',width=40,height=5,command=lambda:scanner(possible_answer[1]))
-Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),fg='black',bg='darkred',width=40,height=5,command=lambda:scanner(possible_answer[2]))
-Buttond= tk.Button(window,text='D: versuch mich nicht',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[3]))
+Buttona= tk.Button(window,font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[0]))
+Buttonb= tk.Button(window,font=('Arial',14),fg='black',bg='darkred',width=40,height=5,command=lambda:scanner(possible_answer[1]))
+Buttonc= tk.Button(window,font=('Arial',14),fg='black',bg='darkred',width=40,height=5,command=lambda:scanner(possible_answer[2]))
+Buttond= tk.Button(window,font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[3]))
 
 def f(name =""):
     print("Übergeberner Name " + name)
@@ -231,7 +230,7 @@ def f(name =""):
     start_button = tk.Button(window, text='Start Game', font=('Arial', 15),fg='white',bg='black', command=start_game)
     start_button.grid(row=9, column=0,columnspan=12, padx=0, pady=0)
 
-    # Schwarzen Balken erstellen
+    # Schwarzen Balken erstellen XXX
     black_bar = tk.Label(window, text="Wissen ist Macht", bg="black", fg="white", width=184, height=1)
     black_bar.grid(row=0, column=0, columnspan=6, padx=0, pady=0, sticky='n')
 
@@ -242,7 +241,7 @@ def f(name =""):
     center(window)
     window.mainloop()
 
-if __name__ == "__main__":
+if __name__ == "__main__":#wenn über ID gestartet wird
     def start_game():
         global player_name_entry, player_name_label, player
         player = player_name_entry.get()
