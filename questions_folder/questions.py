@@ -444,7 +444,7 @@ questions_dict = {
     },
     64: {
         'question': 'Welches ist das größste Riff-Ökosystem der Welt?',
-        'possible_answers': ['Floida Keys Reef', 'Maldives Coral Reef', 'Great Barrier Reef', 'Belize Barrier Reef'],
+        'possible_answers': ['Florida Keys Reef', 'Maldives Coral Reef', 'Great Barrier Reef', 'Belize Barrier Reef'],
         'question_answer': 'Great Barrier Reef',
         'picture': 'nature.jpg',
         'current_category': 'Natur'
