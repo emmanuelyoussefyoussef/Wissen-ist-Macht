@@ -121,6 +121,8 @@ def ende():
     Buttonb.lower()
     Buttonc.lower()
     Buttond.lower()
+    score.lower()
+    timer.lower()
 
     if total_score==0:
         saved_scores=[]
