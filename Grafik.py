@@ -1,19 +1,15 @@
 import tkinter as tk
-import random
 from questions_folder.questions import *
 from PIL import Image, ImageTk
 from img import *
 
 # Variabeln
-richtige_antwort=''
 index=0
 switcher=True
 player_name_var = ''
 player_name_label=''
 key,imported_questions=get_random_questions()
 shown_questions=''
-correct_questions=''
-answer=''
 possible_answer=''
 Score = 10
 total_score = 0
@@ -42,8 +38,6 @@ def auswahl():
 # Nächste Frage wird ausgewählt
 def neue_frage():
     global imported_questions
-    global correct_questions
-    global answer
     if index <= 9:
         shown_questions=imported_questions[key[index]]['question'] # aus der imported_questions dict wird ein neues Element ausgewählt
         print(index,key[index],shown_questions) 
