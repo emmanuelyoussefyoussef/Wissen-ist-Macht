@@ -130,37 +130,56 @@ def ende():
     endergebnis=sum(saved_scores) #Score wird in eine unabhängige variabel gespeichert
     question.config(text='Dein Score beträgt:'+str(endergebnis))#Der Score wird angezeigt
 
-#Grafik einstellungen
+def center(win):
+    win.update_idletasks()
+    width = win.winfo_width()
+    height = win.winfo_height()
+    screen_width = win.winfo_screenwidth()
+    screen_height = win.winfo_screenheight()
+    x = (screen_width // 2) - (width // 2)
+    y = (screen_height // 2) - (height // 2)
+    win.geometry(f'{width}x{height}+{x}+{y}')
+
+# Funktion, um die Mausposition beim Klicken auf die Titelleiste zu speichern
+def start_move(event):
+    global x, y
+    x = event.x
+    y = event.y
+
+# Funktion, um das Fenster zu verschieben
+def move_window(event):
+    win_x = window.winfo_x() + (event.x - x)
+    win_y = window.winfo_y() + (event.y - y)
+    window.geometry(f'+{win_x}+{win_y}')
+
+# Funktion, um die Standard-Titelleiste zu verbergen
+def hide_titlebar(event):
+    window.overrideredirect(True)
+
+# GUI erstellen
 window = tk.Tk()
-window.title('Wissen ist Macht')
-window.geometry('1280x720')
-#---------------------------------------------------------------------------------------------
-#Das Hintergrundabild importiert und hinzugefügt
+window.geometry('1280x740')
+
+# Funktionen an Ereignisse binden
+window.bind("<Map>", hide_titlebar)
+window.bind("<Configure>", hide_titlebar)
+
+# Background
 spiel_bild= Image.open("img/start.PNG")
 spiel_bild= spiel_bild.resize((1280, 720))
-
 hintergrund_bild_spiel= ImageTk.PhotoImage(spiel_bild)
-
 hintergrund_placeholder = tk.Label(window, image=hintergrund_bild_spiel)
-hintergrund_placeholder.place(x=0, y=0, relwidth=1, relheight=1)
+hintergrund_placeholder.place(x=0, y=10, relwidth=1, relheight=1)
 hintergrund_placeholder.lift()
-
-#timer placeholder
 timer = tk.Label(window,text='Timer: ',font=('Arial',15),fg='white',bg='black')
-#timer.grid(row=0,column=0,sticky='NW')
 
-
-#Score placeholder
+# Score placeholder
 score = tk.Label(window,text='Score: '+str(Score),font=('Arial',15),fg='white',bg='black')
-#score.grid(row=0,column=4)
-#Fragen placeholder
 question = tk.Label(window,text=shown_questions,font=('Arial',20),fg='white',bg='black')
-#question.lift(aboveThis=hintergrund_placeholder)
-#question.grid(row=2,column=0,columnspan=5)
-#---------------------------------------------------------------------------------------------
-#Abstände
+
+# Abstände
 abstandzw_name_frage= tk.Label(window,text='',width=40,height=5)
-abstandzw_name_frage.grid(row=1,column=0,columnspan=2)
+abstandzw_name_frage.grid(row=2,column=0,columnspan=2)
 abstandzw_name_frage.lower(belowThis=hintergrund_placeholder)
 abstandzw_frage_antwort= tk.Label(window,text='',width=40,height=15)
 abstandzw_frage_antwort.grid(row=3,column=0,columnspan=2)
@@ -175,7 +194,7 @@ abstandzw_regeln_spielername=tk.Label(window,text='',width=15,height=6)
 abstandzw_regeln_spielername.grid(row=7,column=4)
 abstandzw_regeln_spielername.lower()
 
-#Antwort Blöcke
+# Antwort Blöcke
 Buttona= tk.Button(window,text='A: ich bin die richtige Antwort vertraue mir',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[0]))
 Buttonb= tk.Button(window,text='B: ich bin leider falsch',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[1]))
 Buttonc= tk.Button(window,text='C: ich bin auch leider falsch',font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[2]))
@@ -186,17 +205,17 @@ def f(name =""):
     def start_game():
         global player_name_entry, player_name_label, player, player_name_var
         player = name
-        player_name_var = player
+        player_name_var = name
         player_name_label = tk.Label(window, text=player, font=('Arial', 18),fg='white',bg='black')
-        player_name_label.grid(row=0, column=2, sticky='NW')
+        player_name_label.grid(row=0, column=0, columnspan=10, padx=0, pady=30, sticky='n')
         start_button.grid_forget()
-        Buttona.grid(row=3,column=0,padx=80,pady=20)
+        Buttona.grid(row=3,column=0,padx=80,pady=40)
         Buttonb.grid(row=3,column=4)
         Buttonc.grid(row=4,column=0)
         Buttond.grid(row=4,column=4)
-        score.grid(row=0,column=4,sticky='NE')
-        question.grid(row=2,column=0,columnspan=6)
-        timer.grid(row=0,column=0,sticky='NW')
+        score.grid(row=0,column=4, padx=0, pady=30, sticky='ne')
+        question.grid(row=2,column=0, columnspan=6, pady=80, sticky='n')
+        timer.grid(row=0,column=0, padx=70, pady=30, sticky='nw')
         #das hintergrundsbild wird aktualisiert
         spiel_bild = Image.open("img/background.jpg")
         spiel_bild = spiel_bild.resize((1280, 720))
@@ -207,11 +226,20 @@ def f(name =""):
         hoch_timer(0)
 
     player_name_entry = tk.Label(window, text=name, font=('Arial', 15),fg='white',bg='black')
-    player_name_entry.grid(row=8, column=5)
+    player_name_entry.grid(row=8, column=0, columnspan=12, padx=0, pady=30)
     player_name_entry.lift(aboveThis=hintergrund_placeholder)
     start_button = tk.Button(window, text='Start Game', font=('Arial', 15),fg='white',bg='black', command=start_game)
-    start_button.grid(row=8, column=4)
+    start_button.grid(row=9, column=0,columnspan=12, padx=0, pady=0)
 
+    # Schwarzen Balken erstellen
+    black_bar = tk.Label(window, text="Wissen ist Macht", bg="black", fg="white", width=184, height=1)
+    black_bar.grid(row=0, column=0, columnspan=6, padx=0, pady=0, sticky='n')
+
+    # Close-Button erstellen und in den Vordergrund bringen
+    close_button = tk.Button(window, text="X", bg="red", fg="white", command=window.destroy, width=2, height=1,  borderwidth=0, highlightthickness=0)
+    close_button.place(relx=1, rely=0, anchor='ne')
+
+    center(window)
     window.mainloop()
 
 if __name__ == "__main__":
@@ -222,16 +250,16 @@ if __name__ == "__main__":
             global player_name_var
             player_name_var = player
             player_name_label = tk.Label(window, text=player, font=('Arial', 18),fg='white',bg='black')
-            player_name_label.grid(row=0, column=2, sticky='NW')
+            player_name_label.grid(row=0, column=0, columnspan=6, padx=0, pady=30, sticky='n')
             player_name_entry.grid_forget()
             start_button.grid_forget()
-            Buttona.grid(row=3,column=0,padx=80,pady=20)
+            Buttona.grid(row=3,column=0,padx=80,pady=40)
             Buttonb.grid(row=3,column=4)
             Buttonc.grid(row=4,column=0)
             Buttond.grid(row=4,column=4)
-            score.grid(row=0,column=4,sticky='NE')
-            question.grid(row=2,column=0,columnspan=6)
-            timer.grid(row=0,column=0,sticky='NW')
+            score.grid(row=0,column=4, padx=0, pady=30, sticky='ne')
+            question.grid(row=2,column=0, columnspan=6, pady=80, sticky='n')
+            timer.grid(row=0,column=0, padx=70, pady=30, sticky='nw')
             #das hintergrundsbild wird aktualisiert
             spiel_bild = Image.open("img/background.jpg")
             spiel_bild = spiel_bild.resize((1280, 720))
@@ -242,9 +270,18 @@ if __name__ == "__main__":
             hoch_timer(0)
 
     player_name_entry = tk.Entry(window, text="player", font=('Arial', 15),fg='white',bg='black')
-    player_name_entry.grid(row=8, column=5)
+    player_name_entry.grid(row=8, column=0,columnspan=12, padx=0, pady=30)
     player_name_entry.lift(aboveThis=hintergrund_placeholder)
     start_button = tk.Button(window, text='Start Game', font=('Arial', 15),fg='white',bg='black', command=start_game)
-    start_button.grid(row=8, column=4)
+    start_button.grid(row=9, column=0, columnspan=12, padx=0, pady=0)
 
+    # Schwarzen Balken erstellen
+    black_bar = tk.Label(window, text="Wissen ist Macht", bg="black", fg="white", width=184, height=1)
+    black_bar.grid(row=0, column=0, columnspan=6, padx=0, pady=0, sticky='n')
+
+    # Close-Button erstellen und in den Vordergrund bringen
+    close_button = tk.Button(window, text="X", bg="red", fg="white", command=window.destroy, width=2, height=1,  borderwidth=0, highlightthickness=0)
+    close_button.place(relx=1, rely=0, anchor='ne')
+
+    center(window)
     window.mainloop()
