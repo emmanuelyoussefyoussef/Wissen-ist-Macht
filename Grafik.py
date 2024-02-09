@@ -5,108 +5,103 @@ from PIL import Image, ImageTk
 import keyboard
 from img import *
 
-#Variabeln
-
+# Variabeln
 richtige_antwort=''
 index=0
 switcher=True
-player_name_var = ""  # Die Variable für den Spielername initialisieren
+player_name_var = ''
 player_name_label=''
-#diese variabel speichert 10 importierte fragen 
 key,imported_questions=get_random_questions()
-#Variabeln
 shown_questions=''
 correct_questions=''
 answer=''
 possible_answer=''
-#timer_running=False
 Score = 10
 total_score = 0
 saved_scores=[]
 
-#Funktion Timer und ablaufender Score
+# timer und score 
 def hoch_timer(seconds):
     global Score
-    #global timer_running
     timer.config(text=f'Timer: {seconds} s')
     
     if seconds >= 12:
       if (seconds - 12) % 2 == 0:
         Score = max(1, Score -1)
         score.config(text='Score ' + str(Score))
-    #if timer_running:
     window.after(1000, hoch_timer, seconds +1)
 
-
-#Diese Funktionen verteilt die Antworten auf den Buttons
+# Antworten werden auf die Buttons verteilt
 def auswahl():
     global possible_answer
-    possible_answer=imported_questions[key[index]]['possible_answers']#Die variable possible_answer erhält asu der dict die 4 antwortmöglichkeiten
-    Buttona.config(text=possible_answer[0])#Aus der possible_answer liste das erste Element
-    Buttonb.config(text=possible_answer[1])#Aus der possible_answer liste das zweite Element
-    Buttonc.config(text=possible_answer[2])#Aus der possible_answer liste das dritte Element
-    Buttond.config(text=possible_answer[3])#Aus der possible_answer liste das vierte Element
-#Diese funktion sorgt dafür dass neue fragen ausgewählt werden
+    possible_answer=imported_questions[key[index]]['possible_answers']
+    Buttona.config(text=possible_answer[0])
+    Buttonb.config(text=possible_answer[1])
+    Buttonc.config(text=possible_answer[2])
+    Buttond.config(text=possible_answer[3])
+    
+# Nächste Frage wird ausgewählt
 def neue_frage():
     global imported_questions
     global correct_questions
     global answer
     if index <= 9:
-        shown_questions=imported_questions[key[index]]['question'] #aus der imported_questions dict wird ein element ausgesucht und eingespeichert
-        print(index,key[index],shown_questions)#Dient zur kontrolle
-        question.config(text=shown_questions)#Das bearbeitet den Text und aktualisiert die anzeige
+        shown_questions=imported_questions[key[index]]['question'] # aus der imported_questions dict wird ein neues Element ausgewählt
+        print(index,key[index],shown_questions) 
+        question.config(text=shown_questions)
         auswahl()
     
-#Diese FRage wird ein mal aufgerufen um die erste frage zu bekommen am anfang dann ist die Funktion nutzlos
+# Erste Frage, wird einmal aufgerufen
 def erste_frage():
     global switcher
     global possible_answer
-    if switcher ==True:#If funktion damit die Funktion erste_frage() nicht ständig läuft sondern einmalig
+    if switcher ==True: # Funktion soll nur einmal aufgerufen werden
         neue_frage()
-        switcher=False#Setzt switcher auf false damit die If funktion nicht mehr erfüllbar wird
+        switcher=False # if Funktion nicht mehr erfüllt
+        
 #Score update funktion
 def update_score():
     global Score
     Score = 10
-    score.config(text='Score: ' + str(Score))#Hier wird die Score Anzeige aktualisiert und erneut angezeigt
+    score.config(text='Score: ' + str(Score)) # aktuallisiert den score und zeigt ihn erneut an
 
-#Diese Funktion zeigt das Ergebnis Richtig an
+# Anzeige richtiges Ergebnis
 def richtige_antwort():
     global Score
     global total_score
-    window.bell()#Sorgt für ein ton
+    window.bell() # Ton
     update_score()
     total_score += Score
     saved_scores.append(Score)
-    question.config(text="Richtig")#Ändert die Frage und falls die antwort richtig war dann wird Richtig angezeigt
-    window.after(1000,neue_frage)#Nach 1Sekunde wird die neue_frage() funktion aufgerufen
-    if index ==9:#Die If funktion prüft ob die zehnte frage angezeigt wurde und stoppt dann die eingabe
-        window.after(2000, ende)#Am ende wird Richtig oder falsch angezeigt und erst nach 2 sekunden wird das Ergebnis angezeigt
+    question.config(text="Richtig") # Anzeige "Richtig" wenn Antwort richig
+    window.after(1000,neue_frage)# Aufruf nächste Frage 
+    if index ==9:
+        window.after(2000, ende)
 
-
-#diese funktion prüft ab ob die eingabe des spielers richtig ist    
+# Prüft die Eigbe des Spielers  
 def scanner(antwort):
     global index
-    if index<=9:#Solange wir nicht die 10te frage errreicht haben wird die kontrolle fortlaufen
-        if antwort==imported_questions[key[index]]['question_answer']:#prüft ob die ausgewählte antwort die richtige ist
+    if index<=9:
+        if antwort==imported_questions[key[index]]['question_answer']:# Prüft ob die Antwort richtig ist
             richtige_antwort()
         else:falsche_antwort()
     else:
         ende()
-    index = index +1#erhöht die index variable um 1 nach dem beantworten einer Frage
-#Diese Funktion zeigt das Ergebnis Falsch an
+    index = index +1
+    
+#Wird ausgeführt, wenn ein Ergbnis falsch ist
 def falsche_antwort():
     global index
     global Score
     window.bell()
     update_score()
     Score = 10
-    question.config(text="Falsch")#Aktualisiert die Anzeigt und zeigt falsch an
-    window.after(1000,neue_frage)#nach 1 Sekunde wird die neue_frage() funktion aufgerufen
-    if index ==9:#Die If funktion prüft ob die zehnte frage angezeigt wurde und stoppt dann die eingabe
-        window.after(2000,ende)#Am ende wird Richtig oder falsch angezeigt und erst nach 2 sekunden wird das Ergebnis angezeigt 
+    question.config(text="Falsch")# Aktualisiert die Anzeigt und zeigt "Falsch"
+    window.after(1000,neue_frage)
+    if index ==9:
+        window.after(2000,ende)
 
-#Diese Funktion zeigt am ende der Score an
+# Am Ende wird der Score angezeigt
 def ende():
     global saved_scores
     global total_score
@@ -128,11 +123,12 @@ def ende():
         saved_scores=[]
     else:
         saved_scores.append(total_score)
-    endergebnis=sum(saved_scores) #Score wird in eine unabhängige variabel gespeichert
-    question.config(text='Dein Score beträgt:'+str(endergebnis))#Der Score wird angezeigt
-
+    endergebnis=sum(saved_scores) # Score wird in eine unabhängige variabel gespeichert
+    question.config(text='Dein Score beträgt:'+str(endergebnis)) # Der Score wird angezeigt
+    
+# Anhand von der Bildschirmgröße wird der Seitenabstand berechnet (link,rechts,oben,unten) und das Fenster auf dem Bildschirm zentriert
 def center(win):
-    win.update_idletasks() #Anhand von der Bildschirmgröße wird der Seitenabstand berechnet (link,rechts,oben,unten) XXX
+    win.update_idletasks()
     width = win.winfo_width()
     height = win.winfo_height()
     screen_width = win.winfo_screenwidth()
@@ -201,6 +197,7 @@ Buttonb= tk.Button(window,font=('Arial',14),fg='black',bg='darkred',width=40,hei
 Buttonc= tk.Button(window,font=('Arial',14),fg='black',bg='darkred',width=40,height=5,command=lambda:scanner(possible_answer[2]))
 Buttond= tk.Button(window,font=('Arial',14),fg='white',bg='black',width=40,height=5,command=lambda:scanner(possible_answer[3]))
 
+# Funktion, um das Quiz über den Discord Bot zu starten
 def f(name =""):
     print("Übergeberner Name " + name)
     def start_game():
@@ -217,7 +214,6 @@ def f(name =""):
         score.grid(row=0,column=4, padx=0, pady=30, sticky='ne')
         question.grid(row=2,column=0, columnspan=6, pady=80, sticky='n')
         timer.grid(row=0,column=0, padx=70, pady=30, sticky='nw')
-        #das hintergrundsbild wird aktualisiert
         spiel_bild = Image.open("img/background.jpg")
         spiel_bild = spiel_bild.resize((1280, 720))
         hintergrund_bild_spiel = ImageTk.PhotoImage(spiel_bild)
@@ -226,24 +222,29 @@ def f(name =""):
         erste_frage()
         hoch_timer(0)
 
+    # player-name
     player_name_entry = tk.Label(window, text=name, font=('Arial', 15),fg='white',bg='black')
     player_name_entry.grid(row=8, column=0, columnspan=12, padx=0, pady=30)
     player_name_entry.lift(aboveThis=hintergrund_placeholder)
+
+    # start-button
     start_button = tk.Button(window, text='Start Game', font=('Arial', 15),fg='white',bg='black', command=start_game)
     start_button.grid(row=9, column=0,columnspan=12, padx=0, pady=0)
 
-    # Schwarzen Balken erstellen XXX
+    # black-bar
     black_bar = tk.Label(window, text="Wissen ist Macht", bg="black", fg="white", width=184, height=1)
     black_bar.grid(row=0, column=0, columnspan=6, padx=0, pady=0, sticky='n')
 
-    # Close-Button erstellen und in den Vordergrund bringen
+    # close-button
     close_button = tk.Button(window, text="X", bg="red", fg="white", command=window.destroy, width=2, height=1,  borderwidth=0, highlightthickness=0)
     close_button.place(relx=1, rely=0, anchor='ne')
 
+    # Quiz ausführen
     center(window)
     window.mainloop()
-
-if __name__ == "__main__":#wenn über ID gestartet wird
+    
+# Funktion, um das Quiz über die IDE zu starten
+if __name__ == "__main__":
     def start_game():
         global player_name_entry, player_name_label, player
         player = player_name_entry.get()
@@ -270,19 +271,23 @@ if __name__ == "__main__":#wenn über ID gestartet wird
             erste_frage()
             hoch_timer(0)
 
+    # player-name
     player_name_entry = tk.Entry(window, text="player", font=('Arial', 15),fg='white',bg='black')
     player_name_entry.grid(row=8, column=0,columnspan=12, padx=0, pady=30)
     player_name_entry.lift(aboveThis=hintergrund_placeholder)
+
+    # start-button
     start_button = tk.Button(window, text='Start Game', font=('Arial', 15),fg='white',bg='black', command=start_game)
     start_button.grid(row=9, column=0, columnspan=12, padx=0, pady=0)
 
-    # Schwarzen Balken erstellen
+    # black-bar
     black_bar = tk.Label(window, text="Wissen ist Macht", bg="black", fg="white", width=184, height=1)
     black_bar.grid(row=0, column=0, columnspan=6, padx=0, pady=0, sticky='n')
 
-    # Close-Button erstellen und in den Vordergrund bringen
+    # close-button
     close_button = tk.Button(window, text="X", bg="red", fg="white", command=window.destroy, width=2, height=1,  borderwidth=0, highlightthickness=0)
     close_button.place(relx=1, rely=0, anchor='ne')
 
+    # Quiz ausführen
     center(window)
     window.mainloop()
