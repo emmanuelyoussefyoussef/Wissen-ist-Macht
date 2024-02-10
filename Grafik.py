@@ -152,11 +152,12 @@ hintergrund_bild_spiel= ImageTk.PhotoImage(spiel_bild)
 hintergrund_placeholder = tk.Label(window, image=hintergrund_bild_spiel)
 hintergrund_placeholder.place(x=0, y=10, relwidth=1, relheight=1)
 hintergrund_placeholder.lift()
-timer = tk.Label(window,text='Timer: ',font=('Arial',15),fg='white',bg='black')
 
-# Score placeholder
+# Score,question,timer placeholder
 score = tk.Label(window,text='Score: '+str(Score),font=('Arial',15),fg='white',bg='black')
 question = tk.Label(window,text=shown_questions,font=('Arial',20),fg='white',bg='black')
+timer = tk.Label(window,text='Timer: ',font=('Arial',15),fg='white',bg='black')
+
 # Abstände als Labels deklariert
 abstandzw_name_frage= tk.Label(window,text='',width=40,height=5)
 abstandzw_frage_antwort= tk.Label(window,text='',width=40,height=15)
