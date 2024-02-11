@@ -2,7 +2,6 @@ import tkinter as tk
 from questions_folder.questions import *
 from PIL import Image, ImageTk
 from img import *
-
 # Variabeln
 index=0
 switcher=True
@@ -14,62 +13,61 @@ possible_answer=''
 Score = 10
 total_score = 0
 saved_scores=[]
+timer_id = None
+score_id = None
 
-# timer und score 
+# Timer
 def hoch_timer(seconds):
-    global Score
+    global timer_id
     timer.config(text=f'Timer: {seconds} s')
-    
-    if seconds >= 12:
-      if (seconds - 12) % 2 == 0:
-        Score = max(1, Score -1)
-        score.config(text='Score ' + str(Score))
-    window.after(1000, hoch_timer, seconds +1)
+    if seconds == 10:
+        window.after(2000, score_abzug)  # Starte die Funktion score_abzug nach 2 Sekunden
+    timer_id = window.after(1000, hoch_timer, seconds + 1)
 
-# Antworten werden auf die Buttons verteilt
-def auswahl():
-    global possible_answer
-    possible_answer=imported_questions[key[index]]['possible_answers']
-    Buttona.config(text=possible_answer[0])
-    Buttonb.config(text=possible_answer[1])
-    Buttonc.config(text=possible_answer[2])
-    Buttond.config(text=possible_answer[3])
-    
+# Funktion zur Reduzierung des Scores
+def score_abzug():
+    global Score
+    global score_id
+    if Score > 1:
+        Score -= 1
+        score.config(text='Score: ' + str(Score))
+    score_id = window.after(2000, score_abzug)  # Wiederhole alle 2 Sekunden
+
 # Nächste Frage wird ausgewählt
 def neue_frage():
-    global imported_questions
+    global index
+    global timer_id
+    global score_id
+    global Score
     if index <= 9:
-        shown_questions=imported_questions[key[index]]['question'] # aus der imported_questions dict wird ein neues Element ausgewählt
-        print(index,key[index],shown_questions) 
+        shown_questions = imported_questions[key[index]]['question']
         question.config(text=shown_questions)
         auswahl()
-    
-# Erste Frage, wird einmal aufgerufen
+        
+        # Timer-delete
+        if timer_id is not None:
+            window.after_cancel(timer_id)
+        
+        # Score-Timer delete
+        if score_id is not None:
+            window.after_cancel(score_id)
+        
+        # Timer-restart
+        hoch_timer(0)
+        
+        # Score-reset
+        Score = 10
+        score.config(text='Score: ' + str(Score))  # score-label aktualisieren
+
+# Erste Frage (wird einmal aufgerufen)
 def erste_frage():
     global switcher
-    if switcher ==True: # Funktion soll nur einmal aufgerufen werden
+    hoch_timer(0)
+    if switcher == True:
         neue_frage()
-        switcher=False # if Funktion nicht mehr erfüllt
-        
-#Score update funktion
-def update_score():
-    global Score
-    Score = 10
-    score.config(text='Score: ' + str(Score)) # aktuallisiert den score und zeigt ihn erneut an
+        switcher = False
 
-# Anzeige richtiges Ergebnis
-def richtige_antwort():
-    global Score,total_score
-    window.bell() # Ton
-    update_score()
-    total_score += Score
-    saved_scores.append(Score)
-    question.config(text="Richtig") # Anzeige "Richtig" wenn Antwort richig
-    window.after(1000,neue_frage)# Aufruf nächste Frage 
-    if index ==9:
-        window.after(2000, ende)
-
-# Prüft die Eigbe des Spielers  
+# Prüft die Eingabe des Spielers  
 def scanner(antwort):
     global index
     if index<=9:
@@ -79,13 +77,30 @@ def scanner(antwort):
     else:
         ende()
     index = index +1
+
+# Antworten werden auf die Buttons verteilt
+def auswahl():
+    global possible_answer
+    possible_answer=imported_questions[key[index]]['possible_answers']
+    Buttona.config(text=possible_answer[0])
+    Buttonb.config(text=possible_answer[1])
+    Buttonc.config(text=possible_answer[2])
+    Buttond.config(text=possible_answer[3])
+
+# Anzeige richtiges Ergebnis
+def richtige_antwort():
+    global Score,total_score
+    window.bell() # Ton
+    saved_scores.append(Score)
+    question.config(text="Richtig") # Anzeige "Richtig" wenn Antwort richig
+    window.after(1000,neue_frage)# Aufruf nächste Frage 
+    if index ==9:
+        window.after(2000, ende)
     
-#Wird ausgeführt, wenn ein Ergbnis falsch ist
+# Wird ausgeführt, wenn ein Ergbnis falsch ist
 def falsche_antwort():
     global index,Score
     window.bell()
-    update_score()
-    Score = 10
     question.config(text="Falsch")# Aktualisiert die Anzeigt und zeigt "Falsch"
     window.after(1000,neue_frage)
     if index ==9:
@@ -93,13 +108,13 @@ def falsche_antwort():
 
 # Am Ende wird der Score angezeigt
 def ende():
-    global saved_scores, total_score
+    global total_score
     spiel_bild = Image.open("img/score.jpg")
     spiel_bild = spiel_bild.resize((1280, 720))
     hintergrund_bild_spiel = ImageTk.PhotoImage(spiel_bild)
     hintergrund_placeholder.configure(image=hintergrund_bild_spiel)
     hintergrund_placeholder.image = hintergrund_bild_spiel
-    
+
     Buttona.lower()
     Buttonb.lower()
     Buttonc.lower()
@@ -107,13 +122,9 @@ def ende():
     score.lower()
     timer.lower()
 
-    if total_score==0:
-        saved_scores=[]
-    else:
-        saved_scores.append(total_score)
-    endergebnis=sum(saved_scores) # Score wird in eine unabhängige variabel gespeichert
-    question.config(text='Dein Score beträgt:'+str(endergebnis)) # Der Score wird angezeigt
-    
+    total_score = sum(saved_scores)
+    question.config(text='Dein Score beträgt:' + str(total_score))
+   
 # Anhand von der Bildschirmgröße wird der Seitenabstand berechnet (link,rechts,oben,unten) und das Fenster auf dem Bildschirm zentriert
 def center(win):
     win.update_idletasks()
@@ -152,12 +163,11 @@ hintergrund_bild_spiel= ImageTk.PhotoImage(spiel_bild)
 hintergrund_placeholder = tk.Label(window, image=hintergrund_bild_spiel)
 hintergrund_placeholder.place(x=0, y=10, relwidth=1, relheight=1)
 hintergrund_placeholder.lift()
-
-# Score,question,timer placeholder
-score = tk.Label(window,text='Score: '+str(Score),font=('Arial',15),fg='white',bg='black')
-question = tk.Label(window,text=shown_questions,font=('Arial',20),fg='white',bg='black')
 timer = tk.Label(window,text='Timer: ',font=('Arial',15),fg='white',bg='black')
 
+# Score placeholder
+score = tk.Label(window,text='Score: '+str(Score),font=('Arial',15),fg='white',bg='black')
+question = tk.Label(window,text=shown_questions,font=('Arial',20),fg='white',bg='black')
 # Abstände als Labels deklariert
 abstandzw_name_frage= tk.Label(window,text='',width=40,height=5)
 abstandzw_frage_antwort= tk.Label(window,text='',width=40,height=15)
@@ -206,7 +216,6 @@ def f(name =""):
         hintergrund_placeholder.configure(image=hintergrund_bild_spiel)
         hintergrund_placeholder.image = hintergrund_bild_spiel
         erste_frage()
-        hoch_timer(0)
 
     # player-name
     player_name_entry = tk.Label(window, text=name, font=('Arial', 15),fg='white',bg='black')
@@ -222,7 +231,7 @@ def f(name =""):
     black_bar.grid(row=0, column=0, columnspan=6, padx=0, pady=0, sticky='n')
 
     # close-button
-    close_button = tk.Button(window, text="X", bg="red", fg="white", command=window.destroy, width=2, height=1,  borderwidth=0, highlightthickness=0)
+    close_button = tk.Button(window, text="X", bg="red", fg="white", command=window.withdraw, width=2, height=1,  borderwidth=0, highlightthickness=0)
     close_button.place(relx=1, rely=0, anchor='ne')
 
     # Funktionen an Ereignisse binden
@@ -260,7 +269,6 @@ if __name__ == "__main__":
             hintergrund_placeholder.configure(image=hintergrund_bild_spiel)
             hintergrund_placeholder.image = hintergrund_bild_spiel
             erste_frage()
-            hoch_timer(0)
 
     # player-name
     player_name_entry = tk.Entry(window, text="player", font=('Arial', 15),fg='white',bg='black')
