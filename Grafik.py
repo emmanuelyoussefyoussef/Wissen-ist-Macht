@@ -35,10 +35,7 @@ def score_abzug():
 
 # Nächste Frage wird ausgewählt
 def neue_frage():
-    global index
-    global timer_id
-    global score_id
-    global Score
+    global index, timer_id, score_id,Score
     if index <= 9:
         shown_questions = imported_questions[key[index]]['question']
         question.config(text=shown_questions)
